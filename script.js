@@ -1,4 +1,4 @@
-// --- ДАННЫЕ КУРСА ДЕТОКС ДНИ 1-7, СПИСОК ПРОДУКТОВ И РЕЦЕПТЫ ---
+// --- 1. ОБЪЕКТ С ДАННЫМИ (КОНТЕНТ) ---
 // ВАЖНО: Замените "list_of_products.jpg", "recipes_main.jpg" и "menu_day_X.jpg" на реальные имена ваших файлов с фото!
 const DETOX_DAYS_CONTENT = {
     // День 0: Список Продуктов
@@ -63,7 +63,7 @@ const DETOX_DAYS_CONTENT = {
         `
     }, 
     
-    // --- НОВЫЙ БЛОК: ВСЕ РЕЦЕПТЫ ---
+    // --- БЛОК: ВСЕ РЕЦЕПТЫ (КЛЮЧ "recipes") ---
     "recipes": {
         title: "Сборник Рецептов Курса",
         photoUrl: "recipes_main.jpg", // ЗАМЕНИТЕ НА ИМЯ ВАШЕГО ФАЙЛА-ФОТО
@@ -175,10 +175,138 @@ const DETOX_DAYS_CONTENT = {
     },
     // --- КОНЕЦ БЛОКА РЕЦЕПТЫ ---
     
-    // ... (Остальной контент Дней 1-7)
-    "1": { /* Ваш код Дня 1 */ ... },
-    "2": { /* Ваш код Дня 2 */ ... },
-    // ... и т.д. до "7"
+    // День 1
+    "1": {
+        title: "День 1: Подготовка и старт",
+        photoUrl: "menu_day_1.jpg", 
+        description: `<h3>ЗАВТРАК: Смузи «Очищающий зеленый»</h3><p>Рецепт см. в разделе "Рецепты". Выпить стакан теплой воды, через 30 минут — смузи.</p><h3>ОБЕД: Рис с овощами</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>УЖИН: Салат «Мягкое очищение»</h3><p>Рецепт см. в разделе "Рецепты".</p><p>**Активность:** Лёгкая прогулка 45 минут.</p>`
+    },
+    // День 2
+    "2": {
+        title: "День 2: Активное очищение",
+        photoUrl: "menu_day_2.jpg", 
+        description: `<h3>ЗАВТРАК: Теплый смузи с хурмой</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>ОБЕД: Лодочки с рыбой и овощами</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>УЖИН: Овощное спагетти с креветками</h3><p>Рецепт см. в разделе "Рецепты".</p><p>**Важно:** Выпить не менее 2,5 литров чистой воды.</p>`
+    },
+    // День 3
+    "3": {
+        title: "День 3: Полностью растительный день",
+        photoUrl: "menu_day_3.jpg", 
+        description: `<h3>ЗАВТРАК: Зеленый микс с сельдереем</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>ОБЕД: Теплый салат из киноа и авокадо</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>УЖИН: Суп-пюре с сельдереем и шпинатом</h3><p>Рецепт см. в разделе "Рецепты".</p><p>**Совет:** Добавьте 1 ч.л. конопляного масла в смузи для поддержки.</p>`
+    },
+    // День 4
+    "4": {
+        title: "День 4: Восстановление",
+        photoUrl: "menu_day_4.jpg", 
+        description: `<h3>ЗАВТРАК: Бананово-черничный смузи</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>ОБЕД: Теплый салат с лососем и авокадо</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>УЖИН: Киноа с овощами</h3><p>Рецепт см. в разделе "Рецепты".</p><p>**Активность:** Йога или растяжка 30 минут.</p>`
+    },
+    // День 5
+    "5": {
+        title: "День 5: Насыщение",
+        photoUrl: "menu_day_5.jpg", 
+        description: `<h3>ЗАВТРАК: Яблочно-персиковый смузи</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>ОБЕД: Фаршированная форель</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>УЖИН: Салат с кальмарами</h3><p>Рецепт см. в разделе "Рецепты".</p><p>**Перекус:** Запеченное яблоко или чиа-десерт.</p>`
+    },
+    // День 6
+    "6": {
+        title: "День 6: Легкость и закрепление",
+        photoUrl: "menu_day_6.jpg", 
+        description: `<h3>ЗАВТРАК: Гречневый пудинг</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>ОБЕД: Рыба по-азиатски</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>УЖИН: Чечевичный суп-пюре</h3><p>Рецепт см. в разделе "Рецепты".</p><p>**Важно:** Добавьте в рацион свекольные конфеты (если нет противопоказаний) для работы кишечника.</p>`
+    },
+    // День 7
+    "7": { 
+        title: "День 7: Завершение и мягкий выход",
+        photoUrl: "menu_day_7.jpg", 
+        description: `<h3>ЗАВТРАК: Бодрящий смузи с сельдереем</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>ОБЕД: Салат с киноа и рукколой</h3><p>Рецепт см. в разделе "Рецепты".</p><h3>УЖИН: Овощной крем-суп</h3><p>Рецепт см. в разделе "Рецепты".</p><p>**Поздравляем!** Начните мягкий переход к обычному питанию, постепенно добавляя более сложные продукты.</p>` 
+    },
     
 };
 // --- КОНЕЦ ВСЕГО КОНТЕНТА КУРСА ДЕТОКС ---
+
+
+// --- 2. ФУНКЦИИ И ЛОГИКА (ОТВЕЧАЕТ ЗА РАБОТУ КНОПОК) ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Получаем элементы для работы
+    const navButtons = document.querySelectorAll('#footer-nav .nav-button');
+    const detoxMenu = document.getElementById('detox-menu');
+    const dayDetailScreen = document.getElementById('screen-day-detail');
+    const dayDetailTitle = document.getElementById('day-detail-title');
+    const dayContentArea = document.getElementById('day-content');
+    const backButton = document.querySelector('.back-button');
+    const appContainer = document.getElementById('app-container'); // Для защиты от копирования
+
+    // Функция для переключения экранов в подвале
+    function switchScreen(targetId) {
+        document.querySelectorAll('.screen').forEach(screen => {
+            screen.classList.remove('active');
+            screen.classList.add('hidden'); // Скрываем все экраны
+        });
+        document.getElementById(targetId).classList.add('active'); // Показываем целевой
+        document.getElementById(targetId).classList.remove('hidden');
+
+        // Обновляем активную кнопку в навигации
+        navButtons.forEach(button => {
+            if (button.getAttribute('data-target') === targetId) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
+            }
+        });
+    }
+
+    // Обработчик для кнопок навигации в подвале
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const target = button.getAttribute('data-target');
+            switchScreen(target);
+        });
+    });
+
+    // Обработчик для кнопок Дней и Рецептов (на главном экране)
+    if (detoxMenu) {
+        detoxMenu.addEventListener('click', (event) => {
+            const button = event.target.closest('.menu-item');
+            if (button) {
+                const dayKey = button.getAttribute('data-day');
+                
+                // Проверяем, что это не будущий курс
+                if (button.classList.contains('future-course')) {
+                    return; 
+                }
+
+                if (dayKey && DETOX_DAYS_CONTENT[dayKey]) {
+                    const content = DETOX_DAYS_CONTENT[dayKey];
+                    
+                    // 1. Обновляем экран детализации
+                    dayDetailTitle.textContent = content.title;
+                    
+                    // Форматируем HTML для контента
+                    const htmlContent = `
+                        <img src="${content.photoUrl}" alt="${content.title}" class="day-photo">
+                        <div class="day-description">
+                            ${content.description}
+                        </div>
+                    `;
+                    dayContentArea.innerHTML = htmlContent;
+
+                    // 2. Переключаемся на экран детализации
+                    switchScreen('screen-day-detail');
+                }
+            }
+        });
+    }
+
+    // Обработчик для кнопки "Назад"
+    if (backButton) {
+        backButton.addEventListener('click', () => {
+            switchScreen('screen-detox');
+        });
+    }
+
+    // Инициализация при первой загрузке
+    switchScreen('screen-detox');
+    
+    // ДОПОЛНИТЕЛЬНАЯ ЗАЩИТА ОТ КОПИРОВАНИЯ
+    appContainer.addEventListener('copy', (e) => {
+        e.preventDefault();
+    });
+
+});
