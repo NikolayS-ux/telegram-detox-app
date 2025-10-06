@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Курс Детокс - Мягкое очищение (Космос)</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+
+<body oncontextmenu="return false;">
 
     <div id="app-container">
 
@@ -15,38 +12,25 @@
             <h2>Курс Детокс: Мягкое очищение</h2>
             
             <div id="detox-menu">
-                <button class="menu-item">
-                    <h3>1. Рецепты</h3>
+                <button class="menu-item" data-day="0">
+                    <h3>1. Список Продуктов</h3>
+                    <p>Что купить и что подготовить</p>
+                </button>
+                <button class="menu-item" data-day="recipes">
+                    <h3>2. Рецепты</h3>
                     <p>Основные блюда и напитки</p>
                 </button>
                 <button class="menu-item" data-day="1">
-                    <h3>2. День 1</h3>
-                    <p>Меню и план на первый день</p>
+                    <h3>3. День 1</h3>
+                    <p>План на первый день</p>
                 </button>
-                <button class="menu-item" data-day="2">
-                    <h3>3. День 2</h3>
-                    <p>Меню и план на второй день</p>
-                </button>
-                <button class="menu-item" data-day="3">
-                    <h3>4. День 3</h3>
-                    <p>Меню и план на третий день</p>
-                </button>
-                 <button class="menu-item" data-day="4">
-                    <h3>5. День 4</h3>
-                    <p>Меню и план на четвёртый день</p>
-                </button>
-                 <button class="menu-item" data-day="5">
-                    <h3>6. День 5</h3>
-                    <p>Меню и план на пятый день</p>
-                </button>
-                 <button class="menu-item" data-day="6">
-                    <h3>7. День 6</h3>
-                    <p>Меню и план на шестой день</p>
-                </button>
-                 <button class="menu-item" data-day="7">
-                    <h3>8. День 7</h3>
-                    <p>Меню и план на седьмой день</p>
-                </button>
+                <button class="menu-item" data-day="2"><h3>4. День 2</h3><p>План на второй день</p></button>
+                <button class="menu-item" data-day="3"><h3>5. День 3</h3><p>План на третий день</p></button>
+                <button class="menu-item" data-day="4"><h3>6. День 4</h3><p>План на четвёртый день</p></button>
+                <button class="menu-item" data-day="5"><h3>7. День 5</h3><p>План на пятый день</p></button>
+                <button class="menu-item" data-day="6"><h3>8. День 6</h3><p>План на шестой день</p></button>
+                <button class="menu-item" data-day="7"><h3>9. День 7</h3><p>План на седьмой день и выход</p></button>
+                
                 <button class="menu-item future-course">
                     <h3>Курс Стройность</h3>
                     <p>Скоро!</p>
@@ -57,41 +41,25 @@
         <section id="screen-day-detail" class="screen hidden">
             <h2 id="day-detail-title">Меню на День</h2>
             <div id="day-content">
-                <p>Здесь будет фото и описание меню для выбранного дня.</p>
-            </div>
+                </div>
             <button class="back-button">← Назад к меню</button>
         </section>
 
         <section id="screen-results" class="screen hidden">
-            <h2>Мои Результаты и Динамика</h2>
-
-            <form id="results-form">
-                <h3>Ежедневный отчёт</h3>
-
-                <label>Возраст (лет): <input type="number" id="age" required></label>
-                <label>Вес (кг): <input type="number" id="weight" step="0.1" required></label>
-                <label>Рост (см): <input type="number" id="height" required></label>
-
-                <label>Объём груди (см): <input type="number" id="chest" step="0.1"></label>
-                <label>Объём талии (см): <input type="number" id="waist" step="0.1"></label>
-                <label>Объём бёдер (см): <input type="number" id="hips" step="0.1"></label>
-
-                <h4>Показатели умных весов (необязательно)</h4>
-                <label>Жир (%): <input type="number" id="fat" step="0.1"></label>
-                <label>Мышечная масса (%): <input type="number" id="muscle" step="0.1"></label>
-                <label>Вода (%): <input type="number" id="water" step="0.1"></label>
-                <label>ИМТ (BMI): <input type="number" id="bmi" step="0.1"></label>
-                
-                <button type="submit">Сохранить Результаты</button>
-            </form>
-
-            <div id="graph-container">
-                <h3>График Динамики Веса</h3>
-                <canvas id="weightChart"></canvas>
-            </div>
-        </section>
+            </section>
 
         <section id="screen-motivation" class="screen hidden">
-            <h2>Мотивация и Бонусы</h2>
-            
-            <button class
+            </section>
+
+
+        <nav id="footer-nav">
+            <button data-target="screen-detox" class="nav-button active">Курс</button>
+            <button data-target="screen-results" class="nav-button">Результаты</button>
+            <button data-target="screen-motivation" class="nav-button">Бонусы</button>
+        </nav>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
