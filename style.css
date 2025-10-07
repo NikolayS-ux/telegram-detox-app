@@ -1,41 +1,13 @@
 /* style.css */
 
-/* --- ПЕРЕМЕННЫЕ ЦВЕТА (ТЕМЫ) --- */
-:root {
-    /* Светлая тема (Light) */
-    --main-bg-color: linear-gradient(135deg, #A8C0FF, #3F5EFB); /* Темно-голубой/Синий градиент */
-    --accent-color: #7986cb; /* Лиловый, немного светлее */
-    --text-color: #1a1a1a;
-    --card-bg-color: rgba(255, 255, 255, 0.9);
-    --header-bg-color: #ffffff;
-    --footer-bg-color: #f8f8f8;
-    --button-active-bg: #3F5EFB;
-    --button-active-text: #ffffff;
-    --border-color: #ddd;
-}
-
-/* Темная тема */
-.dark-theme {
-    --main-bg-color: linear-gradient(135deg, #1c2755, #0a0e26);
-    --accent-color: #9fa8da;
-    --text-color: #e0e0e0;
-    --card-bg-color: rgba(33, 33, 33, 0.9);
-    --header-bg-color: #1a1a1a;
-    --footer-bg-color: #1a1a1a;
-    --button-active-bg: #9fa8da;
-    --button-active-text: #1a1a1a;
-    --border-color: #333;
-}
-
-
 /* --- БАЗОВЫЙ СТИЛЬ --- */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: var(--main-bg-color); /* Применяем градиент */
-    color: var(--text-color);
+    background-color: #f4f4f9; /* Светло-серый фон */
+    color: #333;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -48,7 +20,7 @@ body {
     max-width: 600px; /* Ограничиваем ширину для мобильного вида */
     margin: 0 auto;
     width: 100%;
-    position: relative; 
+    position: relative; /* Для позиционирования экранов */
 }
 
 /* --- ЭКРАНЫ --- */
@@ -61,7 +33,7 @@ body {
     box-sizing: border-box;
     padding: 60px 0 60px 0; /* Отступ для шапки и подвала */
     overflow-y: auto;
-    background-color: transparent; 
+    background-color: #f4f4f9; 
     transition: opacity 0.3s ease;
 }
 
@@ -76,39 +48,9 @@ body {
 }
 
 .screen-title {
-    color: var(--text-color);
-    font-size: 20px;
     text-align: center;
-    margin: 15px 0 20px 0;
-}
-
-.profile-content, .privacy-content {
-    padding: 15px;
-    background-color: var(--card-bg-color);
-    border-radius: 12px;
-    margin: 10px 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.auth-form input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-
-.auth-form button {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--accent-color);
-    color: var(--button-active-text);
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: not-allowed;
-    opacity: 0.7;
+    color: #007bff;
+    margin-top: 10px;
 }
 
 /* --- ШАПКА (HEADER) --- */
@@ -119,75 +61,37 @@ body {
     right: 0;
     max-width: 600px;
     margin: 0 auto;
-    background-color: var(--header-bg-color);
-    color: var(--text-color);
-    padding: 10px 15px;
+    background-color: #007bff; /* Синий цвет */
+    color: white;
+    padding: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    height: 50px;
-}
-
-.logo-placeholder {
-    width: 30px; 
-    height: 30px;
-}
-
-.header-title {
-    flex-grow: 1;
     text-align: center;
-    font-size: 16px;
     font-weight: bold;
-    /* Сдвигаем заголовок, чтобы он был по центру относительно всей шапки, несмотря на "лого-заглушку" и кнопку темы */
-    margin-left: -30px; 
+    font-size: 18px;
 }
-
-.theme-toggle-button {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: var(--text-color);
-    width: 30px;
-    height: 30px;
-    padding: 0;
-    line-height: 1;
-}
-
 
 /* --- ГЛАВНЫЙ ЭКРАН (DETOX MENU) --- */
-#screen-detox {
-    padding-top: 70px; 
-    display: flex;
-    flex-direction: column;
-}
-
 #detox-menu {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Сдвигаем кнопки ближе к подвалу */
-    padding: 0 15px 15px 15px;
-    gap: 12px;
+    padding: 15px;
+    display: grid;
+    gap: 10px;
 }
 
 .menu-item {
-    background-color: var(--card-bg-color);
-    color: var(--text-color);
-    padding: 15px 20px;
-    border-radius: 12px;
+    background-color: white;
+    color: #333;
+    padding: 15px;
+    border-radius: 8px;
     text-align: center;
     font-size: 16px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: background-color 0.1s;
 }
 
-.menu-item:active {
-    transform: scale(0.98);
+.menu-item:hover {
+    background-color: #e9ecef;
 }
 
 .menu-item.future-course {
@@ -202,8 +106,8 @@ body {
 }
 
 #day-detail-header {
-    background-color: var(--header-bg-color);
-    color: var(--text-color);
+    background-color: white;
+    color: #333;
     padding: 10px 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 5;
@@ -223,7 +127,7 @@ body {
     font-size: 20px;
     margin-right: 10px;
     cursor: pointer;
-    color: var(--accent-color);
+    color: #007bff;
     padding: 0;
 }
 
@@ -234,8 +138,8 @@ body {
 
 #day-content {
     padding: 15px;
-    background-color: var(--card-bg-color);
-    border-radius: 12px;
+    background-color: white;
+    border-radius: 8px;
     margin: 10px 15px;
     line-height: 1.6;
 }
@@ -246,13 +150,12 @@ body {
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 /* Стиль для контента внутри описания */
 .day-description h3 {
-    color: var(--accent-color);
-    border-bottom: 1px solid var(--border-color);
+    color: #007bff;
+    border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
     margin-top: 20px;
     font-size: 17px;
@@ -275,7 +178,7 @@ body {
     right: 0;
     max-width: 600px;
     margin: 0 auto;
-    background-color: var(--footer-bg-color);
+    background-color: white;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-around;
@@ -287,18 +190,14 @@ body {
     flex-grow: 1;
     text-align: center;
     padding: 10px 0;
-    color: var(--text-color);
+    color: #333;
     font-size: 12px;
     cursor: pointer;
     transition: color 0.2s;
 }
 
-.nav-button:hover {
-    color: var(--accent-color);
-}
-
 .nav-button.active {
-    color: var(--button-active-bg);
+    color: #007bff;
     font-weight: bold;
 }
 
