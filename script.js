@@ -152,7 +152,7 @@ function loadDayContent(dayKey) {
 
         dayContent.innerHTML = photoHtml + content.description;
         
-        // Переключаем экраны
+        // Переключаем экраны: используем switchMainScreen, но это экран деталей, поэтому просто прячем главный и показываем детальный
         screenDetox.classList.add('hidden');
         screenDayDetail.classList.remove('hidden');
         
@@ -161,42 +161,4 @@ function loadDayContent(dayKey) {
     }
 }
 
-// 1. ОБРАБОТЧИКИ СОБЫТИЙ для Пунктов Меню Детокса
-detoxMenu.addEventListener('click', (event) => {
-    const menuItem = event.target.closest('.menu-item');
-    if (menuItem && menuItem.hasAttribute('data-day')) {
-        // Игнорируем будущий курс
-        if (menuItem.classList.contains('future-course')) return;
-        
-        const dayKey = menuItem.getAttribute('data-day');
-        loadDayContent(dayKey);
-    }
-});
-
-// 2. ОБРАБОТЧИК СОБЫТИЙ для Кнопки "Назад"
-backButton.addEventListener('click', () => {
-    screenDayDetail.classList.add('hidden');
-    screenDetox.classList.remove('hidden');
-    
-    // Делаем активным "Курс" в нижней навигации
-    switchMainScreen('screen-detox');
-    
-    // Сбрасываем прокрутку главного меню
-    screenDetox.scrollTop = 0;
-});
-
-// 3. ОБРАБОТЧИКИ СОБЫТИЙ для Нижней Навигации
-footerNavButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const targetScreen = button.getAttribute('data-target');
-        switchMainScreen(targetScreen);
-        
-        // Скрываем экран деталей, если переключаемся на Результаты/Бонусы
-        if (targetScreen !== 'screen-detox') {
-            screenDayDetail.classList.add('hidden');
-        }
-    });
-});
-
-// Инициализация при загрузке: убедиться, что активный экран отображается правильно
-switchMainScreen('screen-detox');
+// 1. ОБ
