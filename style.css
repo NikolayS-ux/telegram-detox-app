@@ -25,7 +25,6 @@ body {
 
 .screen {
     padding: 20px;
-    padding-bottom: 80px; /* ИСПРАВЛЕНИЕ: Увеличен нижний отступ, чтобы футер не закрывал контент и кнопку "Назад". */
     flex-grow: 1; 
     overflow-y: auto; 
 }
@@ -39,45 +38,66 @@ h2 {
     border-bottom: 2px solid #33334d; 
     padding-bottom: 10px;
     margin-top: 0;
-    text-align: center; /* ИСПРАВЛЕНИЕ: Центрируем заголовок */
+    margin-bottom: 20px;
+    font-size: 24px;
 }
 
-h3, h4 {
-    color: #ffffff; 
+h3 {
+    color: #ffffff;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    border-bottom: 1px solid #33334d;
+    padding-bottom: 5px;
+}
+
+.day-photo-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.day-photo {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 #detox-menu {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 15px;
-    padding-top: 10px;
 }
 
-.menu-item, .large-button {
-    background-color: #2b2b4d;
+.menu-item {
+    background-color: #2e2e4e; 
+    color: white;
+    padding: 15px;
     border: none;
     border-radius: 12px;
-    padding: 15px;
     text-align: left;
     cursor: pointer;
-    transition: background-color 0.2s;
-    color: #ffffff; 
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .menu-item:hover {
-    background-color: #3e3e66;
+    background-color: #383861;
+    transform: translateY(-2px);
 }
 
 .menu-item h3 {
     margin: 0 0 5px 0;
-    color: #a55eea; 
-    font-size: 16px;
+    font-size: 18px;
+    color: #a55eea;
+    border: none;
+    padding: 0;
 }
 
 .menu-item p {
     margin: 0;
-    font-size: 12px;
-    color: #cccccc; 
+    font-size: 14px;
+    color: #cccccc;
 }
 
 .future-course {
@@ -85,6 +105,8 @@ h3, h4 {
     border: 1px dashed #a55eea;
     opacity: 0.7;
 }
+
+/* СТИЛИ ДЛЯ ФОРМЫ РЕЗУЛЬТАТОВ */
 
 #results-form label {
     display: block;
@@ -122,42 +144,138 @@ h3, h4 {
     background-color: #8e44ad;
 }
 
+/* СТИЛИ ДЛЯ ГРАФИКА */
+.description {
+    color: #cccccc;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    height: 300px; /* Задаем высоту для графика */
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    background-color: #22223a;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+
+/* СТИЛИ ДЛЯ ИСТОРИИ ЗАМЕРОВ */
+.results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.results-item {
+    background-color: #2e2e4e;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 5px solid #a55eea;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}
+
+.results-date {
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.results-data {
+    font-size: 14px;
+    color: #cccccc;
+}
+
+.results-data strong {
+    color: #a55eea; 
+    font-weight: 600;
+}
+
+
+/* СТИЛИ ДЛЯ ДЕТАЛЕЙ ДНЯ (РЕЦЕПТЫ) */
+
+#day-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#day-content ul li {
+    background-color: #2e2e4e;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-left: 4px solid #a55eea;
+    border-radius: 4px;
+}
+
+#day-content hr {
+    border: 0;
+    border-top: 1px dashed #4d4d73;
+    margin: 20px 0;
+}
+
+#day-content h4 {
+    color: #a55eea;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+#day-content p {
+    line-height: 1.6;
+    color: #cccccc;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.back-button {
+    background-color: #a55eea;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.back-button:hover {
+    background-color: #8e44ad;
+}
+
+/* СТИЛИ ДЛЯ НИЖНЕЙ НАВИГАЦИИ */
+
 #footer-nav {
     display: flex;
     justify-content: space-around;
     padding: 10px 0;
-    border-top: 1px solid #33334d;
     background-color: #1a1a2e; 
-    flex-shrink: 0;
-    position: sticky; 
+    border-top: 1px solid #33334d;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+    position: sticky;
     bottom: 0;
-    width: 100%;
-    max-width: 600px;
+    z-index: 100;
 }
 
 .nav-button {
-    flex-grow: 1;
     background: none;
     border: none;
-    padding: 10px;
-    color: #cccccc; 
-    font-size: 14px;
+    color: #ffffff;
+    padding: 10px 0;
     cursor: pointer;
-    transition: color 0.2s;
+    font-size: 14px;
+    flex-grow: 1;
+    transition: color 0.2s, background-color 0.2s;
 }
 
 .nav-button.active {
     color: #a55eea; 
     font-weight: bold;
-}
-
-.back-button {
-    background: #a55eea; 
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    margin-top: 20px;
-    cursor: pointer;
-    font-size: 16px;
+    border-bottom: 3px solid #a55eea;
 }
