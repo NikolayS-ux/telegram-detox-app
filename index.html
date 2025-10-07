@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Детокс Курс</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
 </head>
 
 <body>
 
     <div id="app-container">
 
+        <header id="app-header">
+            Курс Детокс: Мягкое очищение
+        </header>
+
         <section id="screen-detox" class="screen active">
-            <h2>Курс Детокс: Мягкое очищение</h2>
             
             <div id="detox-menu">
                 <button class="menu-item" data-day="0">
@@ -36,7 +38,7 @@
                 <button class="menu-item" data-day="7"><h3>9. День 7</h3><p>План на седьмой день и выход</p></button>
                 
                 <button class="menu-item future-course">
-                    <h3>Курс Стройность</h3>
+                    <h3>Бонусы и Мини-игра</h3>
                     <p>Скоро!</p>
                 </button>
             </div>
@@ -52,62 +54,34 @@
         </section>
 
         <section id="screen-results" class="screen hidden">
-            <h2>Ваши Результаты</h2>
-            <div id="results-tracker-area">
-                <form id="results-form">
-                    <label>
-                        Дата (Сегодня): 
-                        <input type="date" id="input-date" required>
-                    </label>
-                    <label>
-                        Вес (кг): 
-                        <input type="number" id="input-weight" step="0.1" placeholder="Введите вес" required>
-                    </label>
-                    <label>
-                        Объем Талии (см): 
-                        <input type="number" id="input-waist" placeholder="Введите объем">
-                    </label>
-                    <button type="submit">Сохранить Прогресс</button>
-                </form>
-                
-                <hr>
-                
-                <h3>График Веса</h3>
-                <canvas id="weight-chart"></canvas>
-
-                <h3>История Замеров</h3>
-                <ul id="history-list">
-                    </ul>
+            <h2>Трекер Прогресса (Результаты)</h2>
+            <div class="placeholder">
+                <p>Здесь будет ваш график веса и объемов. В первой версии мы оставим это как заглушку, чтобы не усложнять код, но сохраним кнопку!</p>
+                <p style="color: #a55eea;">*Функционал будет добавлен после запуска.</p>
             </div>
         </section>
 
         <section id="screen-motivation" class="screen hidden">
-            <h2>Бонусы и Мотивация</h2>
-            <div id="motivation-content">
-                <p>Добро пожаловать в раздел, который поможет вам сохранять мотивацию и получать дополнительные знания!</p>
-                
-                <h3>Задание дня (Мини-игра)</h3>
-                <div class="large-button" id="daily-task-button">
-                    <p>Начать тест на внимательность (День 1)</p>
-                </div>
-
-                <h3>Полезные статьи</h3>
-                <div class="large-button">
-                    <p>Как правильно выходить из детокса</p>
-                </div>
-                <div class="large-button">
-                    <p>Секреты поддержания фигуры</p>
-                </div>
-                <div class="large-button">
-                    <p>Видео-урок: Утренний лимфодренажный самомассаж</p>
-                </div>
+            <h2>Мотивация и Бонусы</h2>
+            <div class="placeholder">
+                <p>Здесь будут ваши бонусы, статьи и мини-игра, о которой мы говорили.</p>
+                <p style="color: #a55eea;">*Сюда можно легко добавить ссылки на ваши PDF, видео или тесты.</p>
             </div>
         </section>
-
+        
         <nav id="footer-nav">
-            <button data-target="screen-detox" class="nav-button active">Курс</button>
-            <button data-target="screen-results" class="nav-button">Результаты</button>
-            <button data-target="screen-motivation" class="nav-button">Бонусы</button>
+            <button data-target="screen-detox" class="nav-button active">
+                <span class="nav-icon">&#127869;</span>
+                Курс
+            </button>
+            <button data-target="screen-results" class="nav-button">
+                <span class="nav-icon">&#128202;</span>
+                Результаты
+            </button>
+            <button data-target="screen-motivation" class="nav-button">
+                <span class="nav-icon">&#127775;</span>
+                Бонусы
+            </button>
         </nav>
 
     </div>
