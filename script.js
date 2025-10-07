@@ -1,13 +1,14 @@
 // --- 1. ОБЪЕКТ С ДАННЫМИ (КОНТЕНТ) ---
 // ВАЖНО: Замените "list_of_products.jpg", "recipes_main.jpg" и "menu_day_X.jpg" на реальные имена ваших файлов с фото!
 const DETOX_DAYS_CONTENT = {
-    // Дни 0-7 и Рецепты: Полный контент из предыдущего шага.
-    
+    // День 0: Список Продуктов
     "0": {
         title: "Список Продуктов",
         photoUrl: "list_of_products.jpg", // ЗАМЕНИТЕ НА ИМЯ ВАШЕГО ФАЙЛА-ФОТО
         description: `<p>**Курс Детокс - Мягкое очищение, начнем со списка продуктов!**</p><p>ПОКУПАЙТЕ ТОЛЬКО ТЕ ПРОДУКТЫ ИЗ СПИСКА, КОТОРЫЕ:</p><ul><li>ЛЮБИТЕ</li><li>МОЖЕТЕ СЕБЕ ПОЗВОЛИТЬ</li></ul><p>ПРОСМОТРИТЕ УЖЕ ИМЕЮЩИЕСЯ ПРОДУКТЫ</p><p>• ЛУЧШЕ ВСЕГО ПОДОЙДУТ ПРОДУКТЫ КОТОРЫЕ ВЫДЕЛЕНЫ</p><h3>ОВОЩИ:</h3><ul><li>МОРКОВЬ, ТЫКВА, ПОМИДОР, ОГУРЕЦ, СЕЛЬДЕРЕЙ, ШПИНАТ, ЛИСТЬЯ САЛАТА.</li><li>ЛЮБАЯ ЗЕЛЕНЬ (ПЕТРУШКА, УКРОП, РУККОЛА, КИНЗА, И ТД)</li><li>БОБОВЫЕ (ФАСОЛЬ, НУТ, ЧЕЧЕВИЦА КРАСНАЯ)</li><li>ЛУК РЕПЧАТЫЙ, ЗЕЛЕНЫЙ, ПОРЕЙ. СТРУЧКОВАЯ ФАСОЛЬ, КАБАЧОК.</li><li>КАПУСТА (БРОККОЛИ, ЦВЕТНАЯ), АВОКАДО.</li><li>ДОМАШНЯЯ КОНСЕРВАЦИЯ (БЕЗ САХАРА И УКСУСА), В Т.Ч. КВАШЕННАЯ КАПУСТА.</li><li>МАСЛИНЫ, ОЛИВКИ, ЗАМОРОЖЕННЫЕ СМЕСИ ОВОЩЕЙ.</li></ul><h3>ГРИБЫ:</h3><ul><li>ШАМПИНЬОНЫ</li></ul><h3>ФРУКТЫ:</h3><ul><li>ГРУША, ЯБЛОКО, МАНДАРИН, АПЕЛЬСИН, ЛИМОН, АБРИКОС, ПЕРСИК, НЕКТАРИН.</li><li>ГРЕЙПФРУТ, АНАНАС, КИВИ, ФЕЙХОА.</li></ul><h3>ЯГОДЫ:</h3><ul><li>СВЕЖИЕ ИЛИ СУХОФРУКТЫ (КРОМЕ ФИНИКОВ)</li></ul><h3>ОРЕХИ, НЕ ЖАРЕНЫЕ:</h3><ul><li>КЕШЬЮ, ГРЕЦКИЙ, МИНДАЛЬ, ФУНДУК, КЕДРОВЫЕ</li></ul><h3>СЕМЕНА:</h3><ul><li>КУНЖУТ, ЧИА, ЛЬНА</li></ul><h3>КРУПЫ:</h3><ul><li>ГРЕЧНЕВАЯ, КУКУРУЗНАЯ, ПЕРЛОВАЯ.</li><li>БУРЫЙ, КРАСНЫЙ РИС (ЛЮБОЙ НЕШЛИФОВАННЫЙ).</li><li>**КИНОА** (ОЧЕНЬ РЕКОМЕНДУЕМ), АМАРАНТ.</li></ul><h3>МАСЛА:</h3><ul><li>ТОЛЬКО НЕРАФИНИРОВАННЫЕ, ХОЛОДНОГО ОТЖИМА: ОЛИВКОВОЕ, ТЫКВЕННОЕ, КУНЖУТНОЕ, ЛЬНЯНОЕ.</li></ul><p>***Программа питания «Детокс»***</p><ul><li>**Утром натощак** – стакан теплой воды</li><li>Первый завтрак в течение часа после пробуждения</li><li>Один прием пищи по объему **до 300 гр/300мл**</li><li>**День 3 – полностью растительный**</li><li>Со 2 по 6 день включительно – не более одного животного продукта в день</li></ul>`
     }, 
+    
+    // --- БЛОК: ВСЕ РЕЦЕПТЫ (КЛЮЧ "recipes") ---
     "recipes": {
         title: "Сборник Рецептов Курса",
         photoUrl: "recipes_main.jpg", // ЗАМЕНИТЕ НА ИМЯ ВАШЕГО ФАЙЛА-ФОТО
@@ -55,11 +56,12 @@ const DETOX_DAYS_CONTENT = {
         photoUrl: "menu_day_7.jpg", 
         description: `<h3>ПЕРВЫЙ ЗАВТРАК (варианты на выбор):</h3><ul><li>Омлет из 3 яиц – минус 2 желтка (без молока!) + овощи по желанию</li><li>Гречневая каша + кокосовое молочко</li><li>Гречневый пудинг (см. Рецепты)</li><li>Льняная каша + орехи + ягоды</li></ul><h3>ВТОРОЙ ЗАВТРАК (варианты на выбор):</h3><ul><li>Запеченное яблоко 1-2 шт. + иван-чай/ройбуш/цикорий.</li><li>Салат: яблоко + морковь + сельдерей + сок лимона или масло 1 ч. ложка по вкусу</li><li>Салат: огурцы + помидоры + зелень + 1 ст. ложка оливкового масла</li><li>Фрукты: Груша + киви</li></ul><h3>ПЕРЕКУС (варианты на выбор):</h3><ul><li>Чечевичный суп-пюре (см. Рецепты)</li><li>Суп-пюре с сельдереем и шпинатом (см. Рецепты)</li><li>Суп-пюре из брокколи (см. Рецепты)</li></ul><h3>ОБЕД (варианты на выбор):</h3><ul><li>Филе Индейки + запеченные/свежие овощи</li><li>Суп-пюре с перловкой и грибами</li><li>Теплый салат с киноа и авокадо (см. Рецепты)</li></ul><h3>ВТОРОЙ ПЕРЕКУС (по желанию):</h3><ul><li>Груша + апельсин</li><li>Сладкое яблоко + апельсин</li><li>3 киви</li></ul><h3>УЖИН (варианты на выбор):</h3><ul><li>Филе белой нежирной рыбы + овощи</li><li>Филе индейки + овощи</li></ul><p>**Сон 22:00**</p>` 
     },
+    
 };
 // --- КОНЕЦ ВСЕГО КОНТЕНТА КУРСА ДЕТОКС ---
 
 
-// --- 2. ФУНКЦИИ И ЛОГИКА ---
+// --- 2. ФУНКЦИИ И ЛОГИКА (ОТВЕЧАЕТ ЗА РАБОТУ КНОПОК) ---
 document.addEventListener('DOMContentLoaded', () => {
     // Получаем элементы для работы
     const navButtons = document.querySelectorAll('#footer-nav .nav-button');
@@ -68,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const dayContentArea = document.getElementById('day-content');
     const backButton = document.querySelector('.back-button');
     const appContainer = document.getElementById('app-container'); 
-    const themeToggle = document.getElementById('theme-toggle');
 
     // Функция для переключения экранов в подвале
     function switchScreen(targetId) {
@@ -76,18 +77,53 @@ document.addEventListener('DOMContentLoaded', () => {
             screen.classList.remove('active');
             screen.classList.add('hidden'); 
         });
-        document.getElementById(targetId).classList.add('active'); 
-        document.getElementById(targetId).classList.remove('hidden');
+
+        // Специальная логика для "Рецептов"
+        if (targetId === 'screen-recipes') {
+             // 1. Обновляем экран детализации контентом Рецептов
+            const content = DETOX_DAYS_CONTENT['recipes'];
+            dayDetailTitle.textContent = content.title;
+            const htmlContent = `
+                <img src="${content.photoUrl}" alt="${content.title}" class="day-photo">
+                <div class="day-description">
+                    ${content.description}
+                </div>
+            `;
+            dayContentArea.innerHTML = htmlContent;
+            // 2. Переключаемся на экран детализации
+            document.getElementById('screen-day-detail').classList.add('active'); 
+            document.getElementById('screen-day-detail').classList.remove('hidden');
+        } else {
+            // Переключение на обычные экраны (Меню)
+            document.getElementById(targetId).classList.add('active'); 
+            document.getElementById(targetId).classList.remove('hidden');
+        }
+
 
         // Обновляем активную кнопку в навигации
         navButtons.forEach(button => {
             const target = button.getAttribute('data-target');
-            if (target === targetId || (target === 'screen-detox' && (targetId === 'screen-day-detail' || targetId === 'screen-detox'))) {
+            if (target === targetId) {
                 button.classList.add('active');
+            } else if (target === 'screen-recipes' && targetId === 'screen-day-detail') {
+                 // Если на экране деталей, и мы перешли туда из Рецептов, то подсвечиваем Рецепты
+                 button.classList.add('active');
+            } else if (target === 'screen-detox' && (targetId === 'screen-day-detail' || targetId === 'screen-detox')) {
+                 // Если на экране деталей, и мы перешли туда из Меню, то подсвечиваем Меню
+                 button.classList.add('active');
             } else {
                 button.classList.remove('active');
             }
         });
+
+        // Убедимся, что при просмотре Меню/Рецептов активна нужная кнопка
+        if (targetId === 'screen-recipes' || (targetId === 'screen-day-detail' && dayDetailTitle.textContent === DETOX_DAYS_CONTENT['recipes'].title)) {
+            document.querySelector('.nav-button[data-target="screen-recipes"]').classList.add('active');
+            document.querySelector('.nav-button[data-target="screen-detox"]').classList.remove('active');
+        } else if (targetId === 'screen-detox' || targetId === 'screen-day-detail') {
+            document.querySelector('.nav-button[data-target="screen-detox"]').classList.add('active');
+            document.querySelector('.nav-button[data-target="screen-recipes"]').classList.remove('active');
+        }
     }
 
     // Обработчик для кнопок навигации в подвале
@@ -105,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (button) {
                 const dayKey = button.getAttribute('data-day');
                 
+                // Проверяем, что это не будущий курс
                 if (button.classList.contains('future-course')) {
                     return; 
                 }
@@ -115,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // 1. Обновляем экран детализации
                     dayDetailTitle.textContent = content.title;
                     
+                    // Форматируем HTML для контента
                     const htmlContent = `
                         <img src="${content.photoUrl}" alt="${content.title}" class="day-photo">
                         <div class="day-description">
@@ -130,32 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Обработчик для кнопки "Назад" (Возвращает на главный экран меню)
+    // Обработчик для кнопки "Назад"
     if (backButton) {
         backButton.addEventListener('click', () => {
             switchScreen('screen-detox');
         });
     }
-
-    // --- ЛОГИКА ТЕМЫ (ДОБАВЛЕНО) ---
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            // Сохраняем выбор пользователя в локальном хранилище
-            if (document.body.classList.contains('dark-theme')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
-        });
-    }
-
-    // Проверка и применение сохраненной темы при загрузке
-    if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-theme');
-    }
-    // --- КОНЕЦ ЛОГИКИ ТЕМЫ ---
-
 
     // Инициализация при первой загрузке
     switchScreen('screen-detox');
