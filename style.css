@@ -1,10 +1,7 @@
-/* style.css - ФИНАЛЬНЫЙ ЧИСТЫЙ ДИЗАЙН (3 кнопки в подвале) */
-
 /* Основные цвета: */
 /* - Темно-синий/Космос: #1a1a2e */
-/* - Фон body: #0d0d1a (для эффекта тени по бокам) */
 /* - Лиловый/Акцент: #a55eea */
-/* - Светлый/Текст: #ffffff */
+/* - Белый/Текст: #ffffff */
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -20,31 +17,17 @@ body {
     width: 100%;
     max-width: 600px;
     min-height: 100vh;
-    background-color: #1a1a2e; /* Основной фон приложения */
+    background-color: #1a1a2e; 
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
     display: flex;
     flex-direction: column;
 }
 
-/* --- ШАПКА (HEADER) --- */
-#app-header {
-    background-color: #1a1a2e;
-    color: #a55eea; /* Лиловый цвет для заголовка */
-    padding: 15px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-}
-
 .screen {
     padding: 20px;
+    padding-bottom: 80px; /* ИЗМЕНЕНИЕ: Увеличен нижний отступ для видимости кнопки "Назад" над футером. */
     flex-grow: 1; 
     overflow-y: auto; 
-    padding-bottom: 70px; /* Отступ для подвала */
 }
 
 .hidden {
@@ -56,32 +39,21 @@ h2 {
     border-bottom: 2px solid #33334d; 
     padding-bottom: 10px;
     margin-top: 0;
-    text-align: center; 
 }
 
-/* Стили для заглушек */
-.placeholder {
-    background-color: #2b2b4d;
-    padding: 20px;
-    border-radius: 12px;
-    margin-top: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-.placeholder p {
-    margin: 5px 0;
-    line-height: 1.4;
+h3, h4 {
+    color: #ffffff; 
 }
 
-/* --- МЕНЮ КУРСА --- */
 #detox-menu {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Две колонки */
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
     padding-top: 10px;
 }
 
-.menu-item {
-    background-color: #2b2b4d; /* Темная карточка */
+.menu-item, .large-button {
+    background-color: #2b2b4d;
     border: none;
     border-radius: 12px;
     padding: 15px;
@@ -89,7 +61,6 @@ h2 {
     cursor: pointer;
     transition: background-color 0.2s;
     color: #ffffff; 
-    min-height: 80px; 
 }
 
 .menu-item:hover {
@@ -98,7 +69,7 @@ h2 {
 
 .menu-item h3 {
     margin: 0 0 5px 0;
-    color: #a55eea; /* Лиловый заголовок */
+    color: #a55eea; 
     font-size: 16px;
 }
 
@@ -112,87 +83,76 @@ h2 {
     background-color: #1f1f3d; 
     border: 1px dashed #a55eea;
     opacity: 0.7;
-    cursor: default;
 }
 
-
-/* --- ДЕТАЛИ ДНЯ/РЕЦЕПТЫ (Стили без изменений) --- */
-#screen-day-detail {
-    padding: 0;
-}
-#day-detail-header {
-    background-color: #1a1a2e;
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-#day-detail-title {
-    flex-grow: 1;
-    font-size: 18px;
-    margin: 0;
-    color: #a55eea;
-}
-.back-button-detail {
-    background: none;
-    border: none;
-    font-size: 20px;
-    margin-right: 15px;
-    cursor: pointer;
-    color: #a55eea;
-    padding: 0;
-}
-#day-content {
-    padding: 20px;
-}
-.day-photo {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
+#results-form label {
+    display: block;
     margin-bottom: 15px;
+    font-size: 14px;
+    color: #ffffff;
 }
-/* ... (остальные стили деталей) ... */
 
+#results-form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #4d4d73; 
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #33334d; 
+    color: #ffffff; 
+}
 
-/* --- ПОДВАЛ (НАВИГАЦИЯ): 3 КНОПКИ --- */
+#results-form button[type="submit"] {
+    background-color: #a55eea; 
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#results-form button[type="submit"]:hover {
+    background-color: #8e44ad;
+}
+
 #footer-nav {
     display: flex;
     justify-content: space-around;
-    padding: 5px 0; 
+    padding: 10px 0;
     border-top: 1px solid #33334d;
     background-color: #1a1a2e; 
     flex-shrink: 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    max-width: 600px;
-    z-index: 10;
 }
 
 .nav-button {
     flex-grow: 1;
     background: none;
     border: none;
-    padding: 8px 0; 
+    padding: 10px;
     color: #cccccc; 
-    font-size: 12px; 
+    font-size: 14px;
     cursor: pointer;
     transition: color 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.nav-icon {
-    font-size: 20px;
-    margin-bottom: 2px;
 }
 
 .nav-button.active {
     color: #a55eea; 
     font-weight: bold;
+}
+
+.back-button {
+    background: #a55eea; 
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
 }
