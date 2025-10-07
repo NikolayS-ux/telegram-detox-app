@@ -1,157 +1,309 @@
-/* Основные цвета: */
-/* - Темно-синий/Космос: #1a1a2e */
-/* - Лиловый/Акцент: #a55eea */
-/* - Белый/Текст: #ffffff */
+/* style.css */
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #0d0d1a; 
-    color: #ffffff; 
-    display: flex;
-    justify-content: center;
+/* --- ПЕРЕМЕННЫЕ ЦВЕТА (ТЕМЫ) --- */
+:root {
+    /* Светлая тема (Light) */
+    --main-bg-color: linear-gradient(135deg, #A8C0FF, #3F5EFB); /* Темно-голубой/Синий градиент */
+    --accent-color: #7986cb; /* Лиловый, немного светлее */
+    --text-color: #1a1a1a;
+    --card-bg-color: rgba(255, 255, 255, 0.9);
+    --header-bg-color: #ffffff;
+    --footer-bg-color: #f8f8f8;
+    --button-active-bg: #3F5EFB;
+    --button-active-text: #ffffff;
+    --border-color: #ddd;
 }
 
-#app-container {
-    width: 100%;
-    max-width: 600px;
+/* Темная тема */
+.dark-theme {
+    --main-bg-color: linear-gradient(135deg, #1c2755, #0a0e26);
+    --accent-color: #9fa8da;
+    --text-color: #e0e0e0;
+    --card-bg-color: rgba(33, 33, 33, 0.9);
+    --header-bg-color: #1a1a1a;
+    --footer-bg-color: #1a1a1a;
+    --button-active-bg: #9fa8da;
+    --button-active-text: #1a1a1a;
+    --border-color: #333;
+}
+
+
+/* --- БАЗОВЫЙ СТИЛЬ --- */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: var(--main-bg-color); /* Применяем градиент */
+    color: var(--text-color);
     min-height: 100vh;
-    background-color: #1a1a2e; 
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
     display: flex;
     flex-direction: column;
 }
 
+#app-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px; /* Ограничиваем ширину для мобильного вида */
+    margin: 0 auto;
+    width: 100%;
+    position: relative; 
+}
+
+/* --- ЭКРАНЫ --- */
 .screen {
-    padding: 20px;
-    flex-grow: 1; 
-    overflow-y: auto; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 60px 0 60px 0; /* Отступ для шапки и подвала */
+    overflow-y: auto;
+    background-color: transparent; 
+    transition: opacity 0.3s ease;
 }
 
 .hidden {
-    display: none !important;
+    display: none;
+    opacity: 0;
 }
 
-h2 {
-    color: #a55eea; 
-    border-bottom: 2px solid #33334d; 
-    padding-bottom: 10px;
-    margin-top: 0;
+.active {
+    display: block;
+    opacity: 1;
 }
 
-h3, h4 {
-    color: #ffffff; 
+.screen-title {
+    color: var(--text-color);
+    font-size: 20px;
+    text-align: center;
+    margin: 15px 0 20px 0;
 }
 
-#detox-menu {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    padding-top: 10px;
-}
-
-.menu-item, .large-button {
-    background-color: #2b2b4d;
-    border: none;
-    border-radius: 12px;
+.profile-content, .privacy-content {
     padding: 15px;
-    text-align: left;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    color: #ffffff; 
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    margin: 10px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.menu-item:hover {
-    background-color: #3e3e66;
+.auth-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-sizing: border-box;
 }
 
-.menu-item h3 {
-    margin: 0 0 5px 0;
-    color: #a55eea; 
-    font-size: 16px;
-}
-
-.menu-item p {
-    margin: 0;
-    font-size: 12px;
-    color: #cccccc; 
-}
-
-.future-course {
-    background-color: #1f1f3d; 
-    border: 1px dashed #a55eea;
+.auth-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent-color);
+    color: var(--button-active-text);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: not-allowed;
     opacity: 0.7;
 }
 
-#results-form label {
-    display: block;
-    margin-bottom: 15px;
-    font-size: 14px;
-    color: #ffffff;
+/* --- ШАПКА (HEADER) --- */
+#app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--header-bg-color);
+    color: var(--text-color);
+    padding: 10px 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    height: 50px;
 }
 
-#results-form input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    box-sizing: border-box;
-    border: 1px solid #4d4d73; 
-    border-radius: 8px;
+.logo-placeholder {
+    width: 30px; 
+    height: 30px;
+}
+
+.header-title {
+    flex-grow: 1;
+    text-align: center;
     font-size: 16px;
-    background-color: #33334d; 
-    color: #ffffff; 
+    font-weight: bold;
+    /* Сдвигаем заголовок, чтобы он был по центру относительно всей шапки, несмотря на "лого-заглушку" и кнопку темы */
+    margin-left: -30px; 
 }
 
-#results-form button[type="submit"] {
-    background-color: #a55eea; 
-    color: white;
-    padding: 12px;
+.theme-toggle-button {
+    background: none;
     border: none;
-    border-radius: 8px;
-    width: 100%;
-    margin-top: 20px;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    color: var(--text-color);
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    line-height: 1;
 }
 
-#results-form button[type="submit"]:hover {
-    background-color: #8e44ad;
+
+/* --- ГЛАВНЫЙ ЭКРАН (DETOX MENU) --- */
+#screen-detox {
+    padding-top: 70px; 
+    display: flex;
+    flex-direction: column;
 }
 
+#detox-menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Сдвигаем кнопки ближе к подвалу */
+    padding: 0 15px 15px 15px;
+    gap: 12px;
+}
+
+.menu-item {
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    padding: 15px 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.menu-item:active {
+    transform: scale(0.98);
+}
+
+.menu-item.future-course {
+    opacity: 0.6;
+    cursor: default;
+}
+
+/* --- ЭКРАН ДЕТАЛЕЙ ДНЯ (DAY DETAIL) --- */
+#screen-day-detail {
+    padding-top: 65px; 
+    padding-bottom: 60px;
+}
+
+#day-detail-header {
+    background-color: var(--header-bg-color);
+    color: var(--text-color);
+    padding: 10px 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: var(--accent-color);
+    padding: 0;
+}
+
+#day-detail-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#day-content {
+    padding: 15px;
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    margin: 10px 15px;
+    line-height: 1.6;
+}
+
+.day-photo {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Стиль для контента внутри описания */
+.day-description h3 {
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+    margin-top: 20px;
+    font-size: 17px;
+}
+
+.day-description ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.day-description p {
+    margin: 8px 0;
+}
+
+/* --- ПОДВАЛ (FOOTER) --- */
 #footer-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--footer-bg-color);
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
-    border-top: 1px solid #33334d;
-    background-color: #1a1a2e; 
-    flex-shrink: 0;
+    padding: 5px 0;
+    z-index: 10;
 }
 
 .nav-button {
     flex-grow: 1;
-    background: none;
-    border: none;
-    padding: 10px;
-    color: #cccccc; 
-    font-size: 14px;
+    text-align: center;
+    padding: 10px 0;
+    color: var(--text-color);
+    font-size: 12px;
     cursor: pointer;
     transition: color 0.2s;
 }
 
+.nav-button:hover {
+    color: var(--accent-color);
+}
+
 .nav-button.active {
-    color: #a55eea; 
+    color: var(--button-active-bg);
     font-weight: bold;
 }
 
-.back-button {
-    background: #a55eea; 
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    margin-top: 20px;
-    cursor: pointer;
-    font-size: 16px;
+.nav-icon {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 2px;
 }
