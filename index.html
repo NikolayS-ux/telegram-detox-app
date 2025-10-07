@@ -10,12 +10,11 @@
     <div id="app-container">
         
         <header id="app-header">
-            <div class="logo-placeholder"></div> <div class="header-title">Курс Детокс: Мягкое очищение</div>
-            <button id="theme-toggle" class="theme-toggle-button" title="Переключить тему">
-                &#9789; </button>
+            Курс Детокс
         </header>
 
         <div id="screen-detox" class="screen active">
+            <h2 class="screen-title">Мягкое очищение</h2>
             <div id="detox-menu">
                 <div class="menu-item" data-day="0">Список Продуктов (День 0)</div>
                 <div class="menu-item" data-day="1">День 1: Подготовка и старт</div>
@@ -25,8 +24,7 @@
                 <div class="menu-item" data-day="5">День 5: Насыщение</div>
                 <div class="menu-item" data-day="6">День 6: Легкость и закрепление</div>
                 <div class="menu-item" data-day="7">День 7: Завершение и мягкий выход</div>
-                <div class="menu-item" data-day="recipes">Сборник Рецептов Курса</div>
-                <div class="menu-item future-course" data-day="bonuses">Бонусы и Мини-игра (Скоро)</div>
+                <div class="menu-item future-course" data-day="bonuses">Бонусы (Скоро)</div>
             </div>
         </div>
 
@@ -39,39 +37,14 @@
                 </div>
         </div>
 
-        <div id="screen-profile" class="screen hidden">
-            <h2 class="screen-title">Профиль и Регистрация</h2>
-            <div class="profile-content">
-                <p>Здесь будет форма входа и регистрации (ФИО, телефон, подтверждение через ТГ).</p>
-                <p>Для полноценной работы этой секции требуется серверная часть (бэкенд).</p>
-                <form class="auth-form">
-                    <input type="text" placeholder="Имя" required>
-                    <input type="tel" placeholder="Телефон" required>
-                    <button type="submit" disabled>Зарегистрироваться (Не работает без бэкенда)</button>
-                </form>
-            </div>
-        </div>
-        
-        <div id="screen-privacy" class="screen hidden">
-            <h2 class="screen-title">Политика Конфиденциальности</h2>
-            <div class="privacy-content">
-                <p>Мы ценим вашу конфиденциальность. Данное приложение не собирает и не хранит ваши персональные данные, если вы не предоставите их нам добровольно (например, при попытке регистрации).</p>
-                <p>Все представленные материалы носят ознакомительный характер и не являются медицинской рекомендацией. Всегда консультируйтесь со специалистом перед началом любой новой программы питания.</p>
-                </div>
-        </div>
-
         <footer id="footer-nav">
             <div class="nav-button active" data-target="screen-detox">
                 <span class="nav-icon">&#127869;</span>
                 Меню
             </div>
-            <div class="nav-button" data-target="screen-profile">
-                <span class="nav-icon">&#128100;</span>
-                Профиль
-            </div>
-            <div class="nav-button" data-target="screen-privacy">
-                <span class="nav-icon">&#128220;</span>
-                Политика
+            <div class="nav-button" data-target="screen-recipes">
+                <span class="nav-icon">&#128218;</span>
+                Рецепты
             </div>
         </footer>
 
