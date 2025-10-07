@@ -25,7 +25,7 @@ body {
 
 .screen {
     padding: 20px;
-    padding-bottom: 80px; /* ИЗМЕНЕНИЕ: Увеличен нижний отступ для видимости кнопки "Назад" над футером. */
+    padding-bottom: 80px; 
     flex-grow: 1; 
     overflow-y: auto; 
 }
@@ -39,6 +39,7 @@ h2 {
     border-bottom: 2px solid #33334d; 
     padding-bottom: 10px;
     margin-top: 0;
+    text-align: center; /* ИЗМЕНЕНИЕ: Центрируем заголовок */
 }
 
 h3, h4 {
