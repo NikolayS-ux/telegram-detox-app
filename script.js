@@ -1,5 +1,5 @@
 // --- 1. ДАННЫЕ КУРСА ДЕТОКС ДНИ 1-7, СПИСОК ПРОДУКТОВ И РЕЦЕПТЫ ---
-// (ВНИМАНИЕ: Здесь должен быть ваш полный контент. Я использую заглушки для примера)
+// (ВНИМАНИЕ: Проверьте, что ваш полный контент сохранен в этом блоке!)
 const DETOX_DAYS_CONTENT = {
     // День 0: Список Продуктов
     "0": {
@@ -7,7 +7,7 @@ const DETOX_DAYS_CONTENT = {
         photoUrl: "list_of_products.jpg", 
         description: `<h3>ОСНОВНЫЕ ПРИНЦИПЫ</h3>... (полный контент Дня 0) ...`
     }, 
-    // Рецепты (Будут открываться по кнопке из подвала)
+    // Рецепты 
     "recipes": {
         title: "Сборник Рецептов Курса",
         photoUrl: "recipes_main.jpg", 
@@ -29,7 +29,7 @@ const DETOX_DAYS_CONTENT = {
 // --- КОНЕЦ ДАННЫХ КУРСА ---
 
 
-// --- 2. ЛОГИКА ПРИЛОЖЕНИЯ ---
+// --- 2. ЛОГИКА ПРИЛОЖЕНИЯ (Исправлено для 3-х кнопок) ---
 document.addEventListener('DOMContentLoaded', () => {
     // Элементы
     const navButtons = document.querySelectorAll('#footer-nav .nav-button');
@@ -37,20 +37,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const detoxMenu = document.getElementById('detox-menu');
     const dayDetailTitle = document.getElementById('day-detail-title');
     const dayContentArea = document.getElementById('day-content');
-    const backButton = document.querySelector('.back-button-detail');
+    // Я заменил .back-button на .back-button-detail в HTML для лучшего соответствия стилю
+    const backButton = document.querySelector('.back-button-detail'); 
     const footerNav = document.getElementById('footer-nav');
 
-    // --- ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ЭКРАНОВ НАВИГАЦИИ (Курс, Результаты, Бонусы) ---
+    // --- ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ОСНОВНЫХ ЭКРАНОВ (Курс, Результаты, Бонусы) ---
     function switchScreen(targetId) {
-        // Скрываем все основные экраны
+        // Скрываем все экраны
         screens.forEach(screen => {
             screen.classList.add('hidden');
             screen.classList.remove('active');
         });
 
         // Показываем целевой экран
-        document.getElementById(targetId).classList.remove('hidden');
-        document.getElementById(targetId).classList.add('active');
+        const targetScreen = document.getElementById(targetId);
+        if (targetScreen) {
+            targetScreen.classList.remove('hidden');
+            targetScreen.classList.add('active');
+        }
 
         // Обновление активной кнопки в подвале
         navButtons.forEach(button => {
@@ -60,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Показываем подвал
+        // Всегда показываем подвал при переключении основных экранов
         footerNav.classList.remove('hidden');
     }
     
@@ -79,10 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
         dayContentArea.innerHTML = htmlContent;
 
         // Переключаемся на экран детализации
-        document.getElementById('screen-day-detail').classList.remove('hidden');
-        document.getElementById('screen-day-detail').classList.add('active');
+        switchScreen('screen-day-detail');
         
-        // Скрываем подвал на экране деталей
+        // Скрываем подвал, так как это детальный экран
         footerNav.classList.add('hidden');
         
         // Прокрутка к верху
@@ -96,12 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const target = button.getAttribute('data-target');
             
-            // Если цель - "Курс", переключаем на главное меню
-            if (target === 'screen-detox') {
-                switchScreen('screen-detox');
-            } 
-            // Если цель - "Результаты" или "Бонусы" - переключаем на соответствующие экраны
-            else if (target === 'screen-results' || target === 'screen-motivation') {
+            // Если нажимаем на любую из трех кнопок, переключаем основной экран
+            if (target) {
                 switchScreen(target);
             }
         });
@@ -116,24 +115,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (dayKey && DETOX_DAYS_CONTENT[dayKey]) {
                     loadDetailScreen(dayKey);
-                    
-                    // Если нажали на Рецепты в меню, делаем активной кнопку Рецептов в подвале
-                    if (dayKey === 'recipes') {
-                        navButtons.forEach(btn => btn.classList.remove('active'));
-                        document.querySelector('[data-target="screen-recipes"]').classList.add('active');
-                    }
                 }
             }
         });
     }
 
     // 3. Кнопка "Назад" с экрана деталей
+    // Примечание: В вашем HTML есть класс .back-button. 
+    // Я использую .back-button-detail, как мы исправили в CSS/HTML, но 
+    // на всякий случай добавлю обработчик и на .back-button.
+    const backButtonOld = document.querySelector('.back-button'); 
+    
+    const handleBackButton = () => {
+        switchScreen('screen-detox'); 
+    };
+    
     if (backButton) {
-        backButton.addEventListener('click', () => {
-            // Возвращаемся на главный экран Курса
-            switchScreen('screen-detox');
-        });
+        backButton.addEventListener('click', handleBackButton);
     }
+    if (backButtonOld) {
+        backButtonOld.addEventListener('click', handleBackButton);
+    }
+
 
     // Инициализация (начинаем с главного экрана)
     switchScreen('screen-detox');
