@@ -527,6 +527,206 @@ const DETOX_DAYS_CONTENT = {
     }
 }; // ЗАКРЫВАЕТ ОБЪЕКТ DETOX_DAYS_CONTENT
 
+
+// --- ДАННЫЕ И ЛОГИКА ОТСЛЕЖИВАНИЯ РЕЗУЛЬТАТОВ (НОВЫЙ БЛОК) ---
+
+const RESULTS_STORAGE_KEY = 'detox_results';
+let resultsChartInstance = null; // Для хранения экземпляра графика Chart.js
+
+/**
+ * Получает сохраненные результаты из localStorage, сортирует по дате (от новой к старой).
+ * @returns {Array} Массив объектов с результатами.
+ */
+function getStoredResults() {
+    const resultsJson = localStorage.getItem(RESULTS_STORAGE_KEY);
+    // Сначала парсим, затем сортируем от новой даты к старой
+    return resultsJson ? JSON.parse(resultsJson).sort((a, b) => new Date(b.date) - new Date(a.date)) : [];
+}
+
+/**
+ * Сохраняет новый результат, заменяя существующий, если дата совпадает.
+ * @param {Object} newResult - Новый объект результата.
+ */
+function saveResults(newResult) {
+    // Получаем текущие данные, конвертируем даты в стандартный формат для сравнения
+    const results = getStoredResults().map(r => ({ ...r, date: new Date(r.date).toISOString().split('T')[0] }));
+    const resultDate = newResult.date;
+
+    // Проверяем, существует ли запись для этой даты
+    const existingIndex = results.findIndex(r => r.date === resultDate);
+
+    if (existingIndex > -1) {
+        // Обновляем существующую запись
+        results[existingIndex] = newResult;
+    } else {
+        // Добавляем новую запись
+        results.push(newResult);
+    }
+    
+    // Сортируем перед сохранением от старой даты к новой (для графика)
+    results.sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    localStorage.setItem(RESULTS_STORAGE_KEY, JSON.stringify(results));
+}
+
+/**
+ * Рендерит график прогресса с помощью Chart.js.
+ */
+function renderResultsChart() {
+    // Для графика нужны данные, отсортированные от старой даты к новой
+    const results = getStoredResults().reverse(); 
+    const ctx = document.getElementById('results-chart').getContext('2d');
+
+    // Уничтожаем предыдущий экземпляр графика, чтобы избежать наложения
+    if (resultsChartInstance) {
+        resultsChartInstance.destroy();
+    }
+    
+    // Подготовка данных для графика
+    const dates = results.map(r => new Date(r.date).toLocaleDateString('ru-RU'));
+    const weights = results.map(r => r.weight);
+    const waist = results.map(r => r.waist);
+
+    resultsChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [
+                {
+                    label: 'Вес (кг)',
+                    data: weights,
+                    borderColor: '#a55eea', // Лиловый
+                    backgroundColor: 'rgba(165, 94, 234, 0.2)',
+                    tension: 0.3,
+                    fill: false,
+                    pointRadius: 6,
+                    pointHoverRadius: 10
+                },
+                {
+                    label: 'Талия (см)',
+                    data: waist,
+                    borderColor: '#38b7ff', // Синий
+                    backgroundColor: 'rgba(56, 183, 255, 0.2)',
+                    tension: 0.3,
+                    fill: false,
+                    pointRadius: 6,
+                    pointHoverRadius: 10
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    title: {
+                        display: true,
+                        text: 'Измерения',
+                        color: '#ffffff'
+                    },
+                    grid: { color: '#33334d' },
+                    ticks: { color: '#ffffff' }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Дата',
+                        color: '#ffffff'
+                    },
+                    grid: { color: '#33334d' },
+                    ticks: { color: '#ffffff' }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { color: '#ffffff' }
+                }
+            }
+        }
+    });
+}
+
+/**
+ * Рендерит список истории замеров.
+ */
+function renderResultsHistory() {
+    const historyDiv = document.getElementById('results-history');
+    // Используем уже отсортированный массив (от новой даты к старой)
+    const results = getStoredResults(); 
+
+    if (results.length === 0) {
+        historyDiv.innerHTML = '<p class="description">Здесь будет отображаться история ваших замеров после сохранения.</p>';
+        return;
+    }
+
+    let html = '<ul class="results-list">';
+    results.forEach(r => {
+        const date = new Date(r.date).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' });
+        html += `
+            <li class="results-item">
+                <span class="results-date">${date}</span>
+                <span class="results-data">
+                    Вес: <strong>${r.weight !== null ? r.weight + ' кг' : '-'}</strong>
+                    | Талия: <strong>${r.waist !== null ? r.waist + ' см' : '-'}</strong>
+                    | Бедра: <strong>${r.hips !== null ? r.hips + ' см' : '-'}</strong>
+                </span>
+            </li>
+        `;
+    });
+    html += '</ul>';
+    historyDiv.innerHTML = html;
+}
+
+/**
+ * Обновляет представление экрана результатов (график + история).
+ */
+function updateResultsView() {
+    // Устанавливаем сегодняшнюю дату как дефолтное значение
+    document.getElementById('result-date').value = new Date().toISOString().split('T')[0];
+    
+    // Сброс полей формы после просмотра
+    document.getElementById('result-weight').value = '';
+    document.getElementById('result-waist').value = '';
+    document.getElementById('result-hips').value = '';
+
+    renderResultsChart();
+    renderResultsHistory();
+}
+
+/**
+ * Обработчик отправки формы.
+ */
+function handleResultsSubmission(event) {
+    event.preventDefault();
+
+    const dateInput = document.getElementById('result-date');
+    const weightInput = document.getElementById('result-weight');
+    const waistInput = document.getElementById('result-waist');
+    const hipsInput = document.getElementById('result-hips');
+    
+    // Проверка обязательного поля (Вес)
+    if (!weightInput.value) {
+        alert('Пожалуйста, введите ваш вес.');
+        return;
+    }
+
+    const newResult = {
+        date: dateInput.value,
+        weight: parseFloat(weightInput.value) || null,
+        waist: parseInt(waistInput.value) || null,
+        hips: parseInt(hipsInput.value) || null,
+    };
+
+    saveResults(newResult);
+    
+    // Обновляем представление, так как данные изменились
+    updateResultsView(); 
+
+    alert('Результаты сохранены!');
+}
+
+
 // --- ОСНОВНАЯ ЛОГИКА ПРИЛОЖЕНИЯ ---
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -538,13 +738,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const detoxMenu = document.getElementById('detox-menu');
     const backButton = screenDayDetail.querySelector('.back-button');
     const footerNav = document.getElementById('footer-nav');
-    
-    // --- ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ЭКРАНОВ ---
+    const resultsForm = document.getElementById('results-form'); // НОВЫЙ ЭЛЕМЕНТ
+
+
+    // --- ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ЭКРАНОВ (ОБНОВЛЕННАЯ) ---
     function showScreen(screenId) {
         document.querySelectorAll('.screen').forEach(screen => {
             screen.classList.add('hidden');
         });
         document.getElementById(screenId).classList.remove('hidden');
+        
+        // NEW: Handle results screen view update
+        if (screenId === 'screen-results') {
+            updateResultsView(); // Обновляем график и историю при переходе на вкладку "Результаты"
+        }
     }
 
     // --- ОБРАБОТКА КНОПОК ДНЕЙ ДЕТОКСА (ГЛАВНОЕ МЕНЮ) ---
@@ -583,21 +790,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (button) {
             const targetScreenId = button.dataset.target;
             
-            // Переключение активного экрана
-            showScreen(targetScreenId);
-            
             // Переключение активного класса кнопки
             footerNav.querySelectorAll('.nav-button').forEach(btn => {
                 btn.classList.remove('active');
             });
             button.classList.add('active');
 
-            // Если возвращаемся на главный экран, убеждаемся, что показан screen-detox, а не screen-day-detail
-            if (targetScreenId === 'screen-detox') {
-                showScreen('screen-detox');
-            }
+            // Переключение активного экрана
+            showScreen(targetScreenId);
         }
     });
+    
+    // --- ОБРАБОТКА ФОРМЫ РЕЗУЛЬТАТОВ (НОВЫЙ ОБРАБОТЧИК) ---
+    if (resultsForm) {
+        resultsForm.addEventListener('submit', handleResultsSubmission);
+    }
+
 
     // Инициализация: убедиться, что главный экран активен при старте
     showScreen('screen-detox');
