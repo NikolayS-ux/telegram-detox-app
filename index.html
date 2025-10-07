@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Детокс Программа</title>
-    <link rel="stylesheet" href="style.css"> 
+    <title>Detox App</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -50,20 +50,51 @@
         </section>
 
         <section id="screen-results" class="screen hidden">
-            <h2>Мои результаты</h2>
-            <p>Место для формы ввода результатов и графика.</p>
+            <h2>Ваши Результаты</h2>
+            <p class="description">Вносите данные в начале (День 0) и в конце (День 7) курса, чтобы увидеть свой прогресс!</p>
+
+            <div id="results-form-container">
+                <form id="results-form">
+                    <label>
+                        Дата
+                        <input type="date" id="result-date" required>
+                    </label>
+                    <label>
+                        Вес (кг)
+                        <input type="number" step="0.1" id="result-weight" placeholder="Например, 65.5" required>
+                    </label>
+                    <label>
+                        Объем талии (см)
+                        <input type="number" step="1" id="result-waist" placeholder="Например, 70">
+                    </label>
+                    <label>
+                        Объем бедер (см)
+                        <input type="number" step="1" id="result-hips" placeholder="Например, 95">
+                    </label>
+                    <button type="submit">Сохранить Результаты</button>
+                </form>
+            </div>
+
+            <h3>График Прогресса</h3>
+            <div class="chart-container">
+                <canvas id="results-chart"></canvas>
+            </div>
+
+            <h3>История Замеров</h3>
+            <div id="results-history">
+                </div>
         </section>
 
         <section id="screen-motivation" class="screen hidden">
-            <h2>Бонусы и Мотивация</h2>
-            <p>Место для дополнительного контента.</p>
+            <h2>Мотивация</h2>
+            <p class="description">Этот раздел находится в разработке!</p>
         </section>
 
 
         <nav id="footer-nav">
             <button data-target="screen-detox" class="nav-button active">Курс</button>
             <button data-target="screen-results" class="nav-button">Результаты</button>
-            <button data-target="screen-motivation" class="nav-button">Бонусы</button>
+            <button data-target="screen-motivation" class="nav-button">Мотивация</button>
         </nav>
 
     </div>
