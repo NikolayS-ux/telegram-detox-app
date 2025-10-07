@@ -5,48 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Детокс Курс</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
 </head>
+
 <body>
+
     <div id="app-container">
-        
-        <header id="app-header">
-            Курс Детокс
-        </header>
 
-        <div id="screen-detox" class="screen active">
-            <h2 class="screen-title">Мягкое очищение</h2>
+        <section id="screen-detox" class="screen active">
+            <h2>Курс Детокс: Мягкое очищение</h2>
+            
             <div id="detox-menu">
-                <div class="menu-item" data-day="0">Список Продуктов (День 0)</div>
-                <div class="menu-item" data-day="1">День 1: Подготовка и старт</div>
-                <div class="menu-item" data-day="2">День 2: Активное очищение</div>
-                <div class="menu-item" data-day="3">День 3: Полностью растительный день</div>
-                <div class="menu-item" data-day="4">День 4: Восстановление</div>
-                <div class="menu-item" data-day="5">День 5: Насыщение</div>
-                <div class="menu-item" data-day="6">День 6: Легкость и закрепление</div>
-                <div class="menu-item" data-day="7">День 7: Завершение и мягкий выход</div>
-                <div class="menu-item future-course" data-day="bonuses">Бонусы (Скоро)</div>
+                <button class="menu-item" data-day="0">
+                    <h3>1. Список Продуктов</h3>
+                    <p>Что купить и что подготовить</p>
+                </button>
+                <button class="menu-item" data-day="recipes">
+                    <h3>2. Рецепты</h3>
+                    <p>Основные блюда и напитки</p>
+                </button>
+                <button class="menu-item" data-day="1">
+                    <h3>3. День 1</h3>
+                    <p>План на первый день</p>
+                </button>
+                <button class="menu-item" data-day="2"><h3>4. День 2</h3><p>План на второй день</p></button>
+                <button class="menu-item" data-day="3"><h3>5. День 3</h3><p>План на третий день</p></button>
+                <button class="menu-item" data-day="4"><h3>6. День 4</h3><p>План на четвёртый день</p></button>
+                <button class="menu-item" data-day="5"><h3>7. День 5</h3><p>План на пятый день</p></button>
+                <button class="menu-item" data-day="6"><h3>8. День 6</h3><p>План на шестой день</p></button>
+                <button class="menu-item" data-day="7"><h3>9. День 7</h3><p>План на седьмой день и выход</p></button>
+                
+                <button class="menu-item future-course">
+                    <h3>Курс Стройность</h3>
+                    <p>Скоро!</p>
+                </button>
             </div>
-        </div>
+        </section>
 
-        <div id="screen-day-detail" class="screen hidden">
+        <section id="screen-day-detail" class="screen hidden">
             <div id="day-detail-header">
-                <button class="back-button">&#9664;</button>
-                <span id="day-detail-title">Заголовок Дня</span>
+                <button class="back-button-detail">&#9664;</button>
+                <span id="day-detail-title">Меню на День</span>
             </div>
             <div id="day-content">
                 </div>
-        </div>
+        </section>
 
-        <footer id="footer-nav">
-            <div class="nav-button active" data-target="screen-detox">
-                <span class="nav-icon">&#127869;</span>
-                Меню
+        <section id="screen-results" class="screen hidden">
+            <h2>Ваши Результаты</h2>
+            <div id="results-tracker-area">
+                <form id="results-form">
+                    <label>
+                        Дата (Сегодня): 
+                        <input type="date" id="input-date" required>
+                    </label>
+                    <label>
+                        Вес (кг): 
+                        <input type="number" id="input-weight" step="0.1" placeholder="Введите вес" required>
+                    </label>
+                    <label>
+                        Объем Талии (см): 
+                        <input type="number" id="input-waist" placeholder="Введите объем">
+                    </label>
+                    <button type="submit">Сохранить Прогресс</button>
+                </form>
+                
+                <hr>
+                
+                <h3>График Веса</h3>
+                <canvas id="weight-chart"></canvas>
+
+                <h3>История Замеров</h3>
+                <ul id="history-list">
+                    </ul>
             </div>
-            <div class="nav-button" data-target="screen-recipes">
-                <span class="nav-icon">&#128218;</span>
-                Рецепты
+        </section>
+
+        <section id="screen-motivation" class="screen hidden">
+            <h2>Бонусы и Мотивация</h2>
+            <div id="motivation-content">
+                <p>Добро пожаловать в раздел, который поможет вам сохранять мотивацию и получать дополнительные знания!</p>
+                
+                <h3>Задание дня (Мини-игра)</h3>
+                <div class="large-button" id="daily-task-button">
+                    <p>Начать тест на внимательность (День 1)</p>
+                </div>
+
+                <h3>Полезные статьи</h3>
+                <div class="large-button">
+                    <p>Как правильно выходить из детокса</p>
+                </div>
+                <div class="large-button">
+                    <p>Секреты поддержания фигуры</p>
+                </div>
+                <div class="large-button">
+                    <p>Видео-урок: Утренний лимфодренажный самомассаж</p>
+                </div>
             </div>
-        </footer>
+        </section>
+
+        <nav id="footer-nav">
+            <button data-target="screen-detox" class="nav-button active">Курс</button>
+            <button data-target="screen-results" class="nav-button">Результаты</button>
+            <button data-target="screen-motivation" class="nav-button">Бонусы</button>
+        </nav>
 
     </div>
 
