@@ -31,7 +31,7 @@ const DETOX_DAYS_CONTENT = {
             <h3>ФРУКТЫ:</h3>
             <ul>
                 <li>ГРУША, ЯБЛОКО, МАНДАРИН, АПЕЛЬСИН, ЛИМОН, АБРИКОС, ПЕРСИК, НЕКТАРИН.</li>
-                <li>ГРЕЙПФРУТ, АНАНАС, КИВИ, ФЕЙХОА.</li>
+                <li>ГРЕЙППФРУТ, АНАНАС, КИВИ, ФЕЙХОА.</li>
             </ul>
             <h3>ЯГОДЫ:</h3>
             <ul><li>СВЕЖИЕ ИЛИ СУХОФРУКТЫ (КРОМЕ ФИНИКОВ)</li></ul>
@@ -89,4 +89,113 @@ const DETOX_DAYS_CONTENT = {
             <p>**Приготовление:** Лосось приготовить на пару или запечь (25 мин при 200°C). Нарезать авокадо. Смесь зелени выложить на тарелку, добавить авокадо и кусочки лосося. Соль и перец по вкусу.</p>
 
             <h4>Овощное спагетти с креветками</h4>
-            <p>**Ингредиенты:** Кабачок/цукини (1 шт.), Креветки (150 г),
+            <p>**Ингредиенты:** Кабачок/цукини (1 шт.), Креветки (150 г), Чеснок (2 зуб.), Соевый соус (1 ст. л.), Соль, перец.</p>
+            <p>**Приготовление:** Сделать пасту из кабачка. Обжарить лапшу и перец 4-6 мин на сухой сковороде. На другой сковороде
+        `
+    },
+    
+    // ДОБАВЛЕННЫЕ ЗАГЛУШКИ ДЛЯ КОРРЕКТНОЙ РАБОТЫ КНОПОК 1-7 ДНЕЙ
+    "1": { title: "День 1: Ваш План", description: "<p>План на День 1 пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_1.jpg" },
+    "2": { title: "День 2: Ваш План", description: "<p>План на День 2 пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_2.jpg" },
+    "3": { title: "День 3: Полностью Растительный", description: "<p>План на День 3 (полностью растительный) пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_3.jpg" },
+    "4": { title: "День 4: Ваш План", description: "<p>План на День 4 пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_4.jpg" },
+    "5": { title: "День 5: Ваш План", description: "<p>План на День 5 пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_5.jpg" },
+    "6": { title: "День 6: Ваш План", description: "<p>План на День 6 пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_6.jpg" },
+    "7": { title: "День 7: Завершение Курса", description: "<p>План на День 7 и рекомендации по выходу пока отсутствуют в данных. Скоро будут добавлены!</p>", photoUrl: "menu_day_7.jpg" }
+}; // Конец объекта DETOX_DAYS_CONTENT
+
+
+// Оборачиваем весь код в обработчик, чтобы быть уверенным, что HTML загружен
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- ИНИЦИАЛИЗАЦИЯ DOM ЭЛЕМЕНТОВ ---
+    const screenDetox = document.getElementById('screen-detox');
+    const screenDayDetail = document.getElementById('screen-day-detail');
+    const dayDetailTitle = document.getElementById('day-detail-title');
+    const dayContent = document.getElementById('day-content');
+    const detoxMenu = document.getElementById('detox-menu');
+    const backButton = document.querySelector('.back-button');
+    const footerNavButtons = document.querySelectorAll('#footer-nav .nav-button');
+
+    // Функция для переключения между основными экранами (Курс, Результаты, Бонусы)
+    function switchMainScreen(targetId) {
+        // 1. Скрываем ВСЕ экраны
+        document.querySelectorAll('.screen').forEach(screen => {
+            screen.classList.add('hidden');
+            screen.classList.remove('active');
+        });
+        
+        // 2. Показываем целевой основной экран
+        document.getElementById(targetId).classList.remove('hidden');
+        document.getElementById(targetId).classList.add('active');
+        
+        // 3. Обновляем активное состояние в нижней навигации
+        footerNavButtons.forEach(button => {
+            button.classList.remove('active');
+            if (button.getAttribute('data-target') === targetId) {
+                button.classList.add('active');
+            }
+        });
+        
+        // 4. Дополнительно гарантируем, что детальный экран скрыт, если переключаемся между основными
+        if (targetId !== 'screen-detox') {
+            screenDayDetail.classList.add('hidden');
+        }
+    }
+
+    // Функция для загрузки и отображения контента для определенного дня/раздела
+    function loadDayContent(dayKey) {
+        const content = DETOX_DAYS_CONTENT[dayKey];
+        if (content) {
+            dayDetailTitle.textContent = content.title;
+            
+            // Создаем HTML для изображения и контента
+            const photoHtml = content.photoUrl ? 
+                `<p><img src="${content.photoUrl}" alt="${content.title}" onerror="this.style.display='none'; this.closest('p').style.display='none';" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px;"></p>` : 
+                '';
+
+            dayContent.innerHTML = photoHtml + content.description;
+            
+            // Переключаем экраны: прячем главный и показываем детальный
+            screenDetox.classList.add('hidden');
+            screenDayDetail.classList.remove('hidden');
+            
+            // Сбрасываем прокрутку, чтобы начать с верхней части контента дня
+            screenDayDetail.scrollTop = 0;
+        }
+    }
+
+    // --- ОБРАБОТЧИКИ СОБЫТИЙ ---
+
+    // 1. Пункты Меню Детокса (Клик по дням/рецептам)
+    detoxMenu.addEventListener('click', (event) => {
+        const menuItem = event.target.closest('.menu-item');
+        if (menuItem && menuItem.hasAttribute('data-day')) {
+            // Игнорируем будущий курс
+            if (menuItem.classList.contains('future-course')) return;
+            
+            const dayKey = menuItem.getAttribute('data-day');
+            loadDayContent(dayKey);
+        }
+    });
+
+    // 2. Кнопка "Назад к меню" (ИСПРАВЛЕНО)
+    backButton.addEventListener('click', () => {
+        // Вызываем общую функцию переключения на главный экран
+        switchMainScreen('screen-detox');
+        
+        // Сбрасываем прокрутку главного меню
+        screenDetox.scrollTop = 0;
+    });
+
+    // 3. Нижняя Навигация (Курс, Результаты, Бонусы)
+    footerNavButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetScreen = button.getAttribute('data-target');
+            switchMainScreen(targetScreen);
+        });
+    });
+
+    // Инициализация: убедиться, что активный экран отображается правильно
+    switchMainScreen('screen-detox');
+});
