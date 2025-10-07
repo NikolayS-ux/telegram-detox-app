@@ -91,11 +91,18 @@ const DETOX_DAYS_CONTENT = {
             <h4>Овощное спагетти с креветками</h4>
             <p>**Ингредиенты:** Кабачок/цукини (1 шт.), Креветки (150 г), Чеснок (2 зуб.), Соевый соус (1 ст. л.), Соль, перец.</p>
             <p>**Приготовление:** Сделать пасту из кабачка. Обжарить лапшу и перец 4-6 мин на сухой сковороде. На другой сковороде
-            
-            `
-    }
-    // ... здесь должны быть дни 1-7
-};
+        `
+    },
+    
+    // ДОБАВЛЕННЫЕ ЗАГЛУШКИ ДЛЯ КОРРЕКТНОЙ РАБОТЫ КНОПОК 1-7 ДНЕЙ
+    "1": { title: "День 1: Ваш План", description: "<p>План на День 1 пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_1.jpg" },
+    "2": { title: "День 2: Ваш План", description: "<p>План на День 2 пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_2.jpg" },
+    "3": { title: "День 3: Полностью Растительный", description: "<p>План на День 3 (полностью растительный) пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_3.jpg" },
+    "4": { title: "День 4: Ваш План", description: "<p>План на День 4 пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_4.jpg" },
+    "5": { title: "День 5: Ваш План", description: "<p>План на День 5 пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_5.jpg" },
+    "6": { title: "День 6: Ваш План", description: "<p>План на День 6 пока отсутствует в данных. Скоро будет добавлен!</p>", photoUrl: "menu_day_6.jpg" },
+    "7": { title: "День 7: Завершение Курса", description: "<p>План на День 7 и рекомендации по выходу пока отсутствуют в данных. Скоро будут добавлены!</p>", photoUrl: "menu_day_7.jpg" }
+}; // Конец объекта DETOX_DAYS_CONTENT
 
 // --- JAVASCRIPT LOGIC FOR SCREEN SWITCHING AND CONTENT LOADING ---
 
@@ -138,8 +145,9 @@ function loadDayContent(dayKey) {
         dayDetailTitle.textContent = content.title;
         
         // Создаем HTML для изображения и контента
+        // Добавлен простой обработчик ошибки, если фото не найдено
         const photoHtml = content.photoUrl ? 
-            `<p><img src="${content.photoUrl}" alt="${content.title}" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px;"></p>` : 
+            `<p><img src="${content.photoUrl}" alt="${content.title}" onerror="this.style.display='none'; this.closest('p').style.display='none';" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px;"></p>` : 
             '';
 
         dayContent.innerHTML = photoHtml + content.description;
@@ -182,6 +190,11 @@ footerNavButtons.forEach(button => {
     button.addEventListener('click', () => {
         const targetScreen = button.getAttribute('data-target');
         switchMainScreen(targetScreen);
+        
+        // Скрываем экран деталей, если переключаемся на Результаты/Бонусы
+        if (targetScreen !== 'screen-detox') {
+            screenDayDetail.classList.add('hidden');
+        }
     });
 });
 
