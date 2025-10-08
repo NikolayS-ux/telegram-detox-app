@@ -1,4 +1,4 @@
-// --- ДАННЫЕ КУРСА ДЕТОКС ДНИ 1-7, СПИСОК ПРОДУКТОВ И РЕЦЕПТЫ ---
+// --- ДАННЫЕ КУРСА ДЕТОКС ДНИ 1-7, СПИСОК ПРОДУКТОВ И РЕЦЕПТЫ (ВАШ КОНТЕНТ) ---
 // ВАЖНО: Замените "list_of_products.jpg", "recipes_main.jpg" и "menu_day_X.jpg" на реальные имена ваших файлов с фото!
 const DETOX_DAYS_CONTENT = {
     // День 0: Список Продуктов
@@ -486,531 +486,381 @@ const DETOX_DAYS_CONTENT = {
             <p>**СЕГОДНЯ ЖИВОТНЫЙ БЕЛОК НЕ УПОТРЕБЛЯЕМ!**</p>
             <p>Ваше тело очистилось и обновилось. Главная задача – сохранить результат, поэтому в этот день мы плавно возвращаемся к обычному рациону.</p>
             
-            <h3>План питания на День 7:</h3>
-            <h3>Завтрак:</h3>
+            <h3>Первый завтрак:</h3>
             <ul>
-                <li>Любая каша (гречневая, кукурузная, киноа) на воде или кокосовом молоке + ягоды/орехи</li>
-                <li>Гречневый пудинг</li>
+                <li>Смузи (любой на свой вкус)</li>
+                <li>Овсяная каша на воде с ягодами/фруктами</li>
             </ul>
-            <h3>Перекус:</h3>
+            <h3>Второй завтрак:</h3>
             <ul>
-                <li>Смузи (любой, см. рецепты)</li>
-                <li>Фруктовое ассорти</li>
+                <li>Порция фруктов/ягод</li>
+                <li>Запеченное яблоко</li>
             </ul>
             <h3>Обед:</h3>
             <ul>
-                <li>Суп-пюре из бобовых (чечевичный, нутовый)</li>
-                <li>Тушеные овощи + цельный рис</li>
+                <li>Овощной суп-пюре (без мяса и рыбы!)</li>
+                <li>Гречка/Киноа + тушеные овощи</li>
             </ul>
-            <h3>Перекус (по желанию):</h3>
+            <h3>Перекус:</h3>
             <ul>
-                <li>Салат «Детокс»</li>
-                <li>2 хлебца + пюре из авокадо</li>
+                <li>Горсть орехов/семян</li>
+                <li>2 хлебца с хумусом или пюре из авокадо</li>
             </ul>
             <h3>Ужин:</h3>
             <ul>
-                <li>Овощное рагу</li>
-                <li>Теплый салат из свежих овощей с заправкой из оливкового масла и лимона.</li>
+                <li>Салат из свежих овощей с оливковым/льняным маслом</li>
+                <li>Гречка/Киноа + тушеные овощи</li>
             </ul>
 
             <hr>
-            <h2>ПЛАН НА СЛЕДУЮЩИЕ 3 ДНЯ (После окончания программы):</h2>
-            <p>Чтобы результат закрепился, следующие 3 дня соблюдайте следующие правила:</p>
+            <h3>ПРАВИЛА ДЛЯ СЛЕДУЮЩИХ ДНЕЙ:</h3>
             <ul>
-                <li>**Возврат белка:** Начинайте с легкого белка (яйца, индейка, нежирная рыба) и только **один раз в день**.</li>
-                <li>**Углеводы:** Оставьте цельные крупы (киноа, гречка, бурый рис).</li>
-                <li>**Исключить:** Фастфуд, сахар, кофе (ограничить), молочные продукты (на время).</li>
-                <li>**Пить больше воды.**</li>
-                <li>**Добавление молочных продуктов (по желанию):** Через 3 дня можно вернуть кисломолочные продукты (кефир, натуральный йогурт).</li>
+                <li>Животный белок (рыба/мясо/яйца) вводим постепенно, **не более 1 раза в день** в течение первой недели после курса.</li>
+                <li>Сладкое (кроме разрешенного) и мучное (кроме разрешенного) не употребляем еще как минимум 3-4 дня.</li>
+                <li>Постепенно расширяем рацион, избегая жареного, жирного и продуктов с большим количеством сахара.</li>
             </ul>
         `
-    },
-
-    // --- БЛОК МИНИ-ИГРЫ ---
-    "mini_game": {
-        title: "🧠 Мини-игра: Назови Продукт!",
-        photoUrl: "game_icon.jpg", // ЗАМЕНИТЕ НА ИМЯ ВАШЕГО ФАЙЛА-ФОТО
-        description: `
-            <h2>Проверьте себя!</h2>
-            <p>Как хорошо вы запомнили продукты из списка детокса? Начните игру, чтобы проверить!</p>
-            <div id="mini-game-container">
-                <p id="game-question" class="question-text"></p>
-                <div id="game-options" class="options-container"></div>
-                <div id="game-result" class="result-text"></div>
-                <button id="game-start-button" class="action-button primary-button">Начать игру</button>
-                <button id="game-next-button" class="action-button secondary-button" style="display:none;">Следующий вопрос</button>
-                <p id="game-score" class="score-text" style="display:none;">Счет: 0 / 0</p>
-            </div>
-            <style>
-                #mini-game-container {
-                    padding: 20px;
-                    border-radius: 10px;
-                    background-color: #2c3e50;
-                    color: #ecf0f1;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                    text-align: center;
-                }
-                .question-text {
-                    font-size: 1.2em;
-                    margin-bottom: 20px;
-                    font-weight: bold;
-                    color: #38b7ff; /* Синий */
-                }
-                .options-container {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
-                    margin-bottom: 20px;
-                }
-                .option-button {
-                    background-color: #34495e;
-                    color: white;
-                    border: none;
-                    padding: 10px;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    transition: background-color 0.3s;
-                    font-size: 1em;
-                }
-                .option-button:hover:not(:disabled) {
-                    background-color: #4e6a86;
-                }
-                .option-button:disabled {
-                    cursor: default;
-                }
-                .correct {
-                    background-color: #2ecc71 !important; /* Зеленый */
-                    color: black;
-                    font-weight: bold;
-                }
-                .incorrect {
-                    background-color: #e74c3c !important; /* Красный */
-                    color: white;
-                    font-weight: bold;
-                }
-                .result-text {
-                    font-size: 1.1em;
-                    margin-bottom: 15px;
-                    min-height: 25px; /* Чтобы не скакало */
-                }
-                .action-button {
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    font-size: 1em;
-                    margin: 5px;
-                }
-                .primary-button {
-                    background-color: #a55eea; /* Лиловый */
-                    color: white;
-                }
-                .secondary-button {
-                    background-color: #ecf0f1;
-                    color: #2c3e50;
-                }
-                .score-text {
-                    margin-top: 15px;
-                    font-weight: bold;
-                }
-            </style>
-        `
     }
-}; // ЗАКРЫВАЕТ ОБЪЕКТ DETOX_DAYS_CONTENT
+};
 
+// --- ОСНОВНАЯ ЛОГИКА ПРИЛОЖЕНИЯ (ВОССТАНОВЛЕНИЕ) ---
 
-// --- ДАННЫЕ И ЛОГИКА ОТСЛЕЖИВАНИЯ РЕЗУЛЬТАТОВ (СУЩЕСТВУЮЩИЙ БЛОК) ---
+// 1. Получение элементов DOM
+const menuItems = document.querySelectorAll('#detox-menu .menu-item');
+const navButtons = document.querySelectorAll('#footer-nav .nav-button');
+const backButton = document.querySelector('#screen-day-detail .back-button');
 
-const RESULTS_STORAGE_KEY = 'detox_results';
-let resultsChartInstance = null; // Для хранения экземпляра графика Chart.js
+// Элементы для экрана деталей
+const dayDetailTitle = document.getElementById('day-detail-title');
+const dayContent = document.getElementById('day-content');
 
-/**
- * Получает сохраненные результаты из localStorage, сортирует по дате (от новой к старой).
- * @returns {Array} Массив объектов с результатами.
- */
-function getStoredResults() {
-    const resultsJson = localStorage.getItem(RESULTS_STORAGE_KEY);
-    // Сначала парсим, затем сортируем от новой даты к старой
-    return resultsJson ? JSON.parse(resultsJson).sort((a, b) => new Date(b.date) - new Date(a.date)) : [];
+// Элементы для экрана результатов
+const resultsForm = document.getElementById('results-form');
+const resultsChartContext = document.getElementById('results-chart').getContext('2d');
+let resultsChart; // Будет инициализирован позже
+
+// Элементы для экрана мотивации
+const completeDayButton = document.getElementById('complete-day-button');
+const progressBarFill = document.getElementById('progress-bar-fill');
+const progressText = document.getElementById('progress-text');
+const dayCompletionHistory = document.getElementById('day-completion-history');
+const gameArea = document.getElementById('game-area');
+const gameMessage = document.getElementById('game-message');
+
+// 2. Инициализация (загрузка данных из LocalStorage)
+let resultsData = JSON.parse(localStorage.getItem('detoxResults')) || [];
+let completedDays = JSON.parse(localStorage.getItem('detoxCompletedDays')) || {};
+const TOTAL_DAYS = 7;
+
+// 3. Функция для переключения экранов
+function switchScreen(targetId) {
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.add('hidden');
+        screen.classList.remove('active');
+    });
+    
+    const targetScreen = document.getElementById(targetId);
+    if (targetScreen) {
+        targetScreen.classList.remove('hidden');
+        targetScreen.classList.add('active');
+    }
+
+    // Обновляем активную кнопку в навигации
+    navButtons.forEach(btn => {
+        if (btn.getAttribute('data-target') === targetId) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    // Специальные действия при переключении
+    if (targetId === 'screen-results') {
+        renderResults();
+    } else if (targetId === 'screen-motivation') {
+        updateProgressBar();
+        initializeMinigame();
+    }
 }
 
-/**
- * Сохраняет новый результат, заменяя существующий, если дата совпадает.
- * @param {Object} newResult - Новый объект результата.
- */
-function saveResults(newResult) {
-    // Получаем текущие данные, конвертируем даты в стандартный формат для сравнения
-    const results = getStoredResults().map(r => ({ ...r, date: new Date(r.date).toISOString().split('T')[0] }));
-    const resultDate = newResult.date;
+// 4. Обработчик для кнопок главного меню (Дни 1-7, Рецепты)
+menuItems.forEach(button => {
+    button.addEventListener('click', function() {
+        const dayKey = this.getAttribute('data-day');
 
-    // Проверяем, существует ли запись для этой даты
-    const existingIndex = results.findIndex(r => r.date === resultDate);
+        // Проверяем, есть ли контент для этого дня/раздела
+        if (DETOX_DAYS_CONTENT[dayKey]) {
+            const content = DETOX_DAYS_CONTENT[dayKey];
 
-    if (existingIndex > -1) {
-        // Обновляем существующую запись
-        results[existingIndex] = newResult;
-    } else {
-        // Добавляем новую запись
-        results.push(newResult);
-    }
-    
-    // Сортируем перед сохранением от старой даты к новой (для графика)
-    results.sort((a, b) => new Date(a.date) - new Date(b.date));
-    
-    localStorage.setItem(RESULTS_STORAGE_KEY, JSON.stringify(results));
+            // 1. Обновляем заголовок и контент
+            dayDetailTitle.textContent = content.title;
+            
+            // 2. Формируем HTML-код для контента
+            let htmlContent = '';
+            
+            // Добавляем фото
+            if (content.photoUrl) {
+                // ВАЖНО: замените .jpg на реальный тип файла, если это нужно
+                htmlContent += `<div class="content-photo-container">
+                                    <img src="${content.photoUrl}" alt="${content.title}" class="content-photo">
+                                </div>`;
+            }
+
+            // Добавляем текстовое описание
+            htmlContent += `<div class="content-description">${content.description}</div>`;
+            
+            // Вставляем все в блок
+            dayContent.innerHTML = htmlContent;
+
+            // 3. Переключаем на экран с деталями дня
+            switchScreen('screen-day-detail');
+        } else if (this.classList.contains('future-course')) {
+            alert('Этот курс пока не готов! Следите за обновлениями.');
+        }
+    });
+});
+
+// 5. Обработчик для кнопки "Назад к меню"
+if (backButton) {
+    backButton.addEventListener('click', function() {
+        switchScreen('screen-detox');
+    });
 }
 
-/**
- * Рендерит график прогресса с помощью Chart.js.
- */
-function renderResultsChart() {
-    // Для графика нужны данные, отсортированные от старой даты к новой
-    const results = getStoredResults().reverse(); 
-    const ctx = document.getElementById('results-chart').getContext('2d');
+// 6. Обработчик для кнопок в футере (Навигация)
+navButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-target');
+        switchScreen(targetId);
+    });
+});
 
-    // Уничтожаем предыдущий экземпляр графика, чтобы избежать наложения
-    if (resultsChartInstance) {
-        resultsChartInstance.destroy();
+
+// 7. ЛОГИКА ЭКРАНА "РЕЗУЛЬТАТЫ"
+
+// Функция сохранения результатов
+if (resultsForm) {
+    resultsForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const newResult = {
+            date: document.getElementById('result-date').value,
+            weight: parseFloat(document.getElementById('result-weight').value),
+            waist: parseInt(document.getElementById('result-waist').value) || null,
+            hips: parseInt(document.getElementById('result-hips').value) || null,
+        };
+
+        // Проверяем, существует ли уже запись с такой датой
+        const existingIndex = resultsData.findIndex(r => r.date === newResult.date);
+
+        if (existingIndex > -1) {
+            // Обновляем существующую запись
+            resultsData[existingIndex] = newResult;
+        } else {
+            // Добавляем новую и сортируем по дате
+            resultsData.push(newResult);
+            resultsData.sort((a, b) => new Date(a.date) - new Date(b.date));
+        }
+
+        localStorage.setItem('detoxResults', JSON.stringify(resultsData));
+        
+        alert('Результаты сохранены!');
+        resultsForm.reset();
+        renderResults(); // Перерисовываем график и историю
+    });
+}
+
+// Функция построения графика и истории
+function renderResults() {
+    const dates = resultsData.map(r => new Date(r.date).toLocaleDateString());
+    const weights = resultsData.map(r => r.weight);
+    const waists = resultsData.map(r => r.waist);
+    const hips = resultsData.map(r => r.hips);
+
+    // Удаляем старый график, если он существует
+    if (resultsChart) {
+        resultsChart.destroy();
     }
-    
-    // Подготовка данных для графика
-    const dates = results.map(r => new Date(r.date).toLocaleDateString('ru-RU'));
-    const weights = results.map(r => r.weight);
-    const waist = results.map(r => r.waist);
 
-    resultsChartInstance = new Chart(ctx, {
+    // Создаем новый график
+    resultsChart = new Chart(resultsChartContext, {
         type: 'line',
         data: {
             labels: dates,
-            datasets: [
-                {
-                    label: 'Вес (кг)',
-                    data: weights,
-                    borderColor: '#a55eea', // Лиловый
-                    backgroundColor: 'rgba(165, 94, 234, 0.2)',
-                    tension: 0.3,
-                    fill: false,
-                    pointRadius: 6,
-                    pointHoverRadius: 10
-                },
-                {
-                    label: 'Талия (см)',
-                    data: waist,
-                    borderColor: '#38b7ff', // Синий
-                    backgroundColor: 'rgba(56, 183, 255, 0.2)',
-                    tension: 0.3,
-                    fill: false,
-                    pointRadius: 6,
-                    pointHoverRadius: 10
-                }
-            ]
+            datasets: [{
+                label: 'Вес (кг)',
+                data: weights,
+                borderColor: '#4caf50',
+                tension: 0.1,
+                fill: false
+            },
+            {
+                label: 'Талия (см)',
+                data: waists,
+                borderColor: '#ffc107',
+                tension: 0.1,
+                fill: false
+            },
+            {
+                label: 'Бедра (см)',
+                data: hips,
+                borderColor: '#2196f3',
+                tension: 0.1,
+                fill: false
+            }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
                 y: {
-                    beginAtZero: false,
-                    title: {
-                        display: true,
-                        text: 'Измерения',
-                        color: '#ffffff'
-                    },
-                    grid: { color: '#33334d' },
-                    ticks: { color: '#ffffff' }
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Дата',
-                        color: '#ffffff'
-                    },
-                    grid: { color: '#33334d' },
-                    ticks: { color: '#ffffff' }
-                }
-            },
-            plugins: {
-                legend: {
-                    labels: { color: '#ffffff' }
+                    beginAtZero: false
                 }
             }
         }
     });
-}
 
-/**
- * Рендерит список истории замеров
- */
-function renderResultsHistory() {
-    const results = getStoredResults();
-    const historyList = document.getElementById('results-history-list');
-    if (!historyList) return;
-
-    historyList.innerHTML = ''; // Очистка списка
-
-    if (results.length === 0) {
-        historyList.innerHTML = '<p>Нет сохраненных результатов.</p>';
-        return;
+    // Обновляем историю замеров
+    const historyContainer = document.getElementById('results-history');
+    if (historyContainer) {
+        if (resultsData.length === 0) {
+            historyContainer.innerHTML = '<p style="text-align: center;">Нет сохраненных замеров.</p>';
+        } else {
+            historyContainer.innerHTML = resultsData.map(r => `
+                <div class="history-item">
+                    <span>**Дата:** ${new Date(r.date).toLocaleDateString()}</span>
+                    <span>**Вес:** ${r.weight} кг</span>
+                    <span>**Талия:** ${r.waist ? r.waist + ' см' : '-'}</span>
+                    <span>**Бедра:** ${r.hips ? r.hips + ' см' : '-'}</span>
+                </div>
+            `).join('');
+        }
     }
+}
 
-    results.forEach((result, index) => {
-        const date = new Date(result.date).toLocaleDateString('ru-RU');
-        const listItem = document.createElement('li');
-        listItem.className = 'history-item';
-        listItem.innerHTML = `
-            <span>${date}</span>
-            <span>Вес: <strong>${result.weight}</strong> кг</span>
-            <span>Талия: <strong>${result.waist}</strong> см</span>
-            <button class="delete-result-button" data-date="${result.date}">Удалить</button>
-        `;
-        historyList.appendChild(listItem);
-    });
 
-    // Добавление обработчика для кнопок удаления
-    document.querySelectorAll('.delete-result-button').forEach(button => {
-        button.addEventListener('click', function() {
-            deleteResult(this.dataset.date);
-        });
+// 8. ЛОГИКА ЭКРАНА "МОТИВАЦИЯ"
+
+// Функция обновления прогресс-бара и истории
+function updateProgressBar() {
+    const totalCompleted = Object.keys(completedDays).length;
+    const percentage = Math.round((totalCompleted / TOTAL_DAYS) * 100);
+
+    progressBarFill.style.width = `${percentage}%`;
+    progressText.textContent = `Пройдено: ${totalCompleted} из ${TOTAL_DAYS} дней (${percentage}%)`;
+
+    // Обновление истории завершенных дней
+    dayCompletionHistory.innerHTML = '';
+    if (totalCompleted === 0) {
+        dayCompletionHistory.innerHTML = '<p class="tip-box">Начните свой первый день детокса, чтобы увидеть здесь свой прогресс!</p>';
+        completeDayButton.disabled = false; // Кнопка доступна, если нет завершенных
+    } else {
+        const sortedDates = Object.keys(completedDays).sort((a, b) => new Date(a) - new Date(b));
+        dayCompletionHistory.innerHTML = sortedDates.map(date => `
+            <p class="completed-day-item">
+                <span class="day-number">День ${completedDays[date]}:</span>
+                Отмечен ${new Date(date).toLocaleDateString()}
+            </p>
+        `).join('');
+
+        // Проверка, был ли уже завершен сегодня
+        const today = new Date().toISOString().split('T')[0];
+        if (completedDays[today]) {
+            completeDayButton.textContent = `✓ Сегодняшний день уже отмечен как завершенный (День ${completedDays[today]})`;
+            completeDayButton.disabled = true;
+        } else if (totalCompleted >= TOTAL_DAYS) {
+             completeDayButton.textContent = `🎉 Курс завершен! (Все ${TOTAL_DAYS} дней отмечены)`;
+             completeDayButton.disabled = true;
+        } else {
+            completeDayButton.textContent = `✓ Отметить сегодняшний день как завершенный (День ${totalCompleted + 1})`;
+            completeDayButton.disabled = false;
+        }
+    }
+}
+
+// Обработчик кнопки "Отметить день"
+if (completeDayButton) {
+    completeDayButton.addEventListener('click', () => {
+        const today = new Date().toISOString().split('T')[0];
+        const nextDayNumber = Object.keys(completedDays).length + 1;
+
+        if (nextDayNumber > TOTAL_DAYS) {
+            alert('Вы уже завершили весь курс!');
+            return;
+        }
+
+        if (completedDays[today]) {
+            alert('Вы уже отмечали этот день!');
+            return;
+        }
+
+        completedDays[today] = nextDayNumber;
+        localStorage.setItem('detoxCompletedDays', JSON.stringify(completedDays));
+        
+        updateProgressBar();
     });
 }
 
-/**
- * Удаляет результат по дате.
- * @param {string} date - Дата результата в формате YYYY-MM-DD.
- */
-function deleteResult(date) {
-    let results = getStoredResults();
-    // Фильтруем, чтобы оставить все результаты, кроме того, у которого совпадает дата
-    results = results.filter(r => new Date(r.date).toISOString().split('T')[0] !== date);
-    
-    // Сортируем от старой даты к новой для графика перед сохранением
-    results.sort((a, b) => new Date(a.date) - new Date(b.date));
-    
-    localStorage.setItem(RESULTS_STORAGE_KEY, JSON.stringify(results));
-    
-    // Обновляем отображение
-    renderResultsHistory();
-    renderResultsChart(); 
-}
-
-// --- ЛОГИКА МИНИ-ИГРЫ "НАЗОВИ ПРОДУКТ" (НОВЫЙ БЛОК) ---
-
-const DETOX_PRODUCTS = [
-    // 🍎 Фрукты
-    { name: "ЯБЛОКО", category: "Фрукт", type: "Разрешен" },
-    { name: "ГРЕЙПФРУТ", category: "Фрукт", type: "Разрешен" },
-    { name: "БАНАН", category: "Фрукт", type: "Ограничен" }, // Указан в ограничении Дня 3
-    { name: "АПЕЛЬСИН", category: "Фрукт", type: "Разрешен" },
-    // 🥦 Овощи и зелень
-    { name: "ШПИНАТ", category: "Овощ/Зелень", type: "Разрешен" },
-    { name: "СЕЛЬДЕРЕЙ", category: "Овощ/Зелень", type: "Разрешен" },
-    { name: "БРОККОЛИ", category: "Овощ/Зелень", type: "Разрешен" },
-    { name: "КАПУСТА", category: "Овощ/Зелень", type: "Разрешен" },
-    // 🌰 Орехи/Семена/Крупы
-    { name: "ГРЕЧКА", category: "Крупа", type: "Разрешен" },
-    { name: "КИНОА", category: "Крупа", type: "Разрешен" },
-    { name: "МИНДАЛЬ", category: "Орех", type: "Разрешен" },
-    { name: "ПЕРЛОВКА", category: "Крупа", type: "Разрешен" },
-    // 🍖 Белки
-    { name: "ИНДЕЙКА", category: "Животный белок", type: "Разрешен" },
-    { name: "СЕМГА", category: "Животный белок", type: "Разрешен" },
-    { name: "МОЛОКО", category: "Молочный продукт", type: "Запрещен" }, // Указан в ограничении Дня 4
-    { name: "КРЕВЕТКИ", category: "Морепродукт", type: "Разрешен" }
+// ЛОГИКА МИНИ-ИГРЫ
+const gameProducts = [
+    { name: "Авокадо", isHealthy: true },
+    { name: "Белый хлеб", isHealthy: false },
+    { name: "Свекла", isHealthy: true },
+    { name: "Сахар", isHealthy: false },
+    { name: "Кокосовое молоко", isHealthy: true },
+    { name: "Сладкая газировка", isHealthy: false },
+    { name: "Гречка", isHealthy: true },
+    { name: "Торт", isHealthy: false },
 ];
 
-let currentQuestion = {};
-let score = 0;
-let totalQuestions = 0;
+function initializeMinigame() {
+    // Выбираем 4 случайных, из которых 2 полезных и 2 вредных
+    const healthy = gameProducts.filter(p => p.isHealthy).sort(() => 0.5 - Math.random()).slice(0, 2);
+    const unhealthy = gameProducts.filter(p => !p.isHealthy).sort(() => 0.5 - Math.random()).slice(0, 2);
+    const choices = [...healthy, ...unhealthy].sort(() => 0.5 - Math.random());
 
-/**
- * Перемешивает массив.
- * @param {Array} array - Массив для перемешивания.
- * @returns {Array} Перемешанный массив.
- */
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
+    gameArea.innerHTML = '';
+    gameMessage.classList.add('hidden');
+    gameMessage.textContent = '';
 
-/**
- * Генерирует новый вопрос для игры.
- */
-function generateNewQuestion() {
-    const productsCopy = shuffleArray([...DETOX_PRODUCTS]);
-    const correctProduct = productsCopy.pop();
-
-    // Формируем 3 неверных варианта (следим, чтобы не было дубликатов)
-    let incorrectOptions = productsCopy.filter(p => p.name !== correctProduct.name).slice(0, 3);
-    
-    // Если в списке меньше 4 продуктов, просто берем все, что есть
-    if (DETOX_PRODUCTS.length < 4) {
-        incorrectOptions = DETOX_PRODUCTS.filter(p => p.name !== correctProduct.name);
-    }
-
-    const allOptions = shuffleArray([correctProduct, ...incorrectOptions]);
-
-    currentQuestion = {
-        question: `Является ли продукт **${correctProduct.name}** разрешенным на курсе Детокса?`,
-        correctAnswer: correctProduct.type === "Разрешен" ? "Да" : "Нет",
-        options: ["Да", "Нет"]
-    };
-
-    return currentQuestion;
-}
-
-/**
- * Обработчик нажатия на кнопку варианта ответа.
- * @param {string} selectedAnswer - Выбранный ответ ("Да" или "Нет").
- */
-function checkAnswer(selectedAnswer) {
-    const resultElement = document.getElementById('game-result');
-    const optionsContainer = document.getElementById('game-options');
-    const nextButton = document.getElementById('game-next-button');
-    const scoreElement = document.getElementById('game-score');
-
-    // Деактивировать все кнопки после выбора
-    optionsContainer.querySelectorAll('.option-button').forEach(button => {
-        button.disabled = true;
-        if (button.textContent === currentQuestion.correctAnswer) {
-            button.classList.add('correct');
-        } else if (button.textContent === selectedAnswer && selectedAnswer !== currentQuestion.correctAnswer) {
-            button.classList.add('incorrect');
-        }
+    choices.forEach(product => {
+        const btn = document.createElement('button');
+        btn.textContent = product.name;
+        btn.className = 'game-choice-button';
+        btn.addEventListener('click', () => handleGameChoice(product, btn));
+        gameArea.appendChild(btn);
     });
+}
 
-    if (selectedAnswer === currentQuestion.correctAnswer) {
-        resultElement.innerHTML = '🎉 **Правильно!** Продукт действительно ' + (currentQuestion.correctAnswer === "Да" ? 'разрешен.' : 'ограничен/запрещен.');
-        score++;
+function handleGameChoice(product, clickedButton) {
+    // Блокируем все кнопки после выбора
+    document.querySelectorAll('.game-choice-button').forEach(btn => btn.disabled = true);
+
+    gameMessage.classList.remove('hidden');
+    
+    if (product.isHealthy) {
+        gameMessage.textContent = `✅ Правильно! ${product.name} - отличный детокс-продукт.`;
+        gameMessage.style.backgroundColor = 'rgba(76, 175, 80, 0.2)'; // Зеленый фон
+        clickedButton.style.backgroundColor = '#4caf50';
     } else {
-        resultElement.innerHTML = `❌ **Неверно!** Правильный ответ: **${currentQuestion.correctAnswer}**.`;
+        gameMessage.textContent = `❌ Ошибка! ${product.name} содержит запрещенные ингредиенты (сахар, глютен).`;
+        gameMessage.style.backgroundColor = 'rgba(244, 67, 54, 0.2)'; // Красный фон
+        clickedButton.style.backgroundColor = '#f44336';
     }
 
-    totalQuestions++;
-    scoreElement.textContent = `Счет: ${score} / ${totalQuestions}`;
-    nextButton.style.display = 'block';
+    // Через 3 секунды предложить начать новую игру
+    setTimeout(() => {
+        gameArea.innerHTML = '<button class="action-button" onclick="initializeMinigame()">Попробовать снова</button>';
+        gameMessage.style.backgroundColor = 'transparent';
+    }, 3000);
 }
 
-/**
- * Отображает текущий вопрос.
- */
-function displayQuestion() {
-    const { question, options } = generateNewQuestion();
-    const questionElement = document.getElementById('game-question');
-    const optionsContainer = document.getElementById('game-options');
-    const resultElement = document.getElementById('game-result');
-    const nextButton = document.getElementById('game-next-button');
-    const startButton = document.getElementById('game-start-button');
-    const scoreElement = document.getElementById('game-score');
 
-    questionElement.innerHTML = question;
-    optionsContainer.innerHTML = '';
-    resultElement.textContent = '';
-    nextButton.style.display = 'none';
-    startButton.style.display = 'none';
-    scoreElement.style.display = 'block';
-    
-    options.forEach(option => {
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.className = 'option-button';
-        button.addEventListener('click', () => checkAnswer(option));
-        optionsContainer.appendChild(button);
-    });
-}
-
-/**
- * Инициализирует мини-игру.
- */
-function initMiniGame() {
-    const startButton = document.getElementById('game-start-button');
-    const nextButton = document.getElementById('game-next-button');
-
-    if (startButton) {
-        startButton.addEventListener('click', () => {
-            score = 0;
-            totalQuestions = 0;
-            document.getElementById('game-score').textContent = `Счет: 0 / 0`;
-            displayQuestion();
-        });
-    }
-
-    if (nextButton) {
-        nextButton.addEventListener('click', displayQuestion);
-    }
-}
-
-/**
- * Функция, которая будет вызываться при рендеринге контента.
- * Временно для примера, в реальной системе это должно быть интегрировано в основной рендеринг.
- * Если у вас есть функция, которая вызывается после вставки HTML контента в DOM, добавьте туда вызов initMiniGame().
- */
-function MINI_GAME_LOGIC() {
-    // В реальной системе этот вызов должен быть в вашей функции рендеринга,
-    // которая вызывается после вставки HTML-контента мини-игры в DOM.
-    // Например: if (key === 'mini_game') { initMiniGame(); }
-    
-    // Для изолированного примера:
-    const gameContainer = document.getElementById('mini-game-container');
-    if (gameContainer) {
-         initMiniGame();
-         // Скрываем вопрос и кнопки ответа до старта
-         document.getElementById('game-question').textContent = 'Нажмите "Начать игру", чтобы проверить свои знания!';
-         document.getElementById('game-options').innerHTML = '';
-         document.getElementById('game-next-button').style.display = 'none';
-         document.getElementById('game-start-button').style.display = 'block';
-         document.getElementById('game-score').style.display = 'none';
-    }
-}
-
-// --------------------------------------------------------------------------------------------------------
-// --- ПРЕДПОЛАГАЕМАЯ ВАША ОСНОВНАЯ ЛОГИКА (ЕСЛИ ЕСТЬ) ---
-// --------------------------------------------------------------------------------------------------------
-
-/**
- * Предполагаемая функция для обработки клика по элементу меню
- * (Добавьте сюда вашу логику, которая вызывается при выборе контента из DETOX_DAYS_CONTENT)
- * @param {string} key - Ключ контента ('0', 'recipes', '1', 'mini_game', и т.д.)
- */
-function loadContent(key) {
-    const content = DETOX_DAYS_CONTENT[key];
-    const contentArea = document.getElementById('content-area'); // Предполагаемый ID вашего блока для контента
-
-    if (!content) {
-        contentArea.innerHTML = '<h2>Контент не найден.</h2>';
-        return;
-    }
-
-    // Рендеринг контента (вставляем ваш HTML шаблон, например)
-    contentArea.innerHTML = `
-        <h1 class="content-title">${content.title}</h1>
-        <div class="content-photo-area">
-            <img src="${content.photoUrl}" alt="${content.title}" class="content-photo"/>
-        </div>
-        <div class="content-description">
-            ${content.description}
-        </div>
-        ${key === 'results' ? '<canvas id="results-chart"></canvas><ul id="results-history-list"></ul>' : ''}
-    `;
-
-    // Специальная логика после рендеринга
-    if (key === 'results') {
-        renderResultsChart();
-        renderResultsHistory();
-        // Добавление обработчика для формы сохранения результатов (если есть)
-    }
-
-    if (key === 'mini_game') {
-        // Запуск логики мини-игры после вставки ее HTML-контента
-        MINI_GAME_LOGIC();
-    }
-}
-
-// Пример вызова для инициализации мини-игры, если это активный раздел
-// loadContent('mini_game'); // Раскомментируйте, если хотите увидеть игру сразу
-
-// --------------------------------------------------------------------------------------------------------
-// --- КОНЕЦ СУЩЕСТВУЮЩЕЙ/ПРЕДПОЛАГАЕМОЙ ОСНОВНОЙ ЛОГИКИ ---
-// --------------------------------------------------------------------------------------------------------
+// 9. ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
+// Добавляем слушателя, чтобы убедиться, что Chart.js загружен
+document.addEventListener('DOMContentLoaded', () => {
+    // При загрузке страницы показываем главный экран
+    switchScreen('screen-detox');
+    // Запускаем инициализацию для экрана "Результаты" (на всякий случай)
+    renderResults();
+});
