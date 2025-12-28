@@ -2,372 +2,142 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Detox App — Космический режим</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detox App</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* --- CSS СТИЛИ (Адаптированные под ПК и Мобильные) --- */
-        :root {
-            --bg-space: #0d0d1a;
-            --bg-card: #1a1a2e;
-            --bg-item: #2e2e4e;
-            --accent-purple: #a55eea;
-            --accent-hover: #8e44ad;
-            --text-white: #ffffff;
-            --text-gray: #cccccc;
-            --border-color: #33334d;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-space);
-            color: var(--text-white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Адаптация под компьютер */
-        #app-container {
-            width: 100%;
-            max-width: 500px; /* Ограничение ширины на ПК */
-            height: 100vh;
-            background-color: var(--bg-card);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        @media (min-width: 768px) {
-            #app-container {
-                height: 850px; /* Фиксированная высота на мониторах */
-                border-radius: 24px;
-                border: 1px solid var(--border-color);
-                margin: 20px;
-            }
-        }
-
-        .screen {
-            padding: 20px;
-            flex-grow: 1;
-            overflow-y: auto;
-            display: none; /* Скрыты по умолчанию */
-        }
-
-        .screen.active {
-            display: block;
-        }
-
-        h2 {
-            color: var(--accent-purple);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-top: 0;
-            font-size: 24px;
-        }
-
-        h3 {
-            color: var(--text-white);
-            margin-top: 20px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-        }
-
-        /* Меню */
-        .menu-item {
-            background-color: var(--bg-item);
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 12px;
-            text-align: left;
-            cursor: pointer;
-            transition: 0.2s;
-            width: 100%;
-            margin-bottom: 12px;
-        }
-
-        .menu-item:hover {
-            background-color: #383861;
-            transform: translateY(-2px);
-        }
-
-        .menu-item h3 { border: none; margin: 0; color: var(--accent-purple); }
-        .menu-item p { margin: 5px 0 0; font-size: 14px; color: var(--text-gray); }
-
-        /* Прогресс-бар */
-        .progress-container {
-            background-color: var(--border-color);
-            border-radius: 20px;
-            height: 15px;
-            width: 100%;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-
-        #progress-bar-fill {
-            background: linear-gradient(90deg, var(--accent-purple), #8e44ad);
-            height: 100%;
-            width: 0%;
-            transition: width 0.5s ease-in-out;
-        }
-
-        /* Кнопки */
-        .action-button, .back-button, #results-form button {
-            background-color: var(--accent-purple);
-            color: white;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            width: 100%;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        #results-form input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-item);
-            color: white;
-            box-sizing: border-box;
-        }
-
-        /* Навигация (Футер) */
-        #footer-nav {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            background-color: var(--bg-card);
-            border-top: 1px solid var(--border-color);
-            min-height: 60px;
-        }
-
-        .nav-button {
-            background: none;
-            border: none;
-            color: var(--text-gray);
-            font-size: 12px;
-            cursor: pointer;
-            flex: 1;
-        }
-
-        .nav-button.active {
-            color: var(--accent-purple);
-            font-weight: bold;
-        }
-
-        /* Список рецептов в деталях */
-        #day-content ul { list-style: none; padding: 0; }
-        #day-content li { 
-            background: var(--bg-item); 
-            padding: 10px; 
-            margin-bottom: 8px; 
-            border-left: 4px solid var(--accent-purple); 
-            border-radius: 4px;
-        }
-
-        .history-item {
-            background: var(--bg-item);
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
 </head>
-<body>
 
-<div id="app-container">
-    <div id="screen-detox" class="screen active">
-        <h2>Программа Детокса</h2>
-        <div id="detox-menu">
-            <button class="menu-item" data-day="1"><h3>День 1</h3><p>Втягиваемся в режим</p></button>
-            <button class="menu-item" data-day="5"><h3>День 5</h3><p>Максимальное очищение</p></button>
-            <button class="menu-item" data-day="6"><h3>День 6</h3><p>Укрепление результата</p></button>
-            <button class="menu-item" data-day="7"><h3>День 7</h3><p>Выход из программы</p></button>
-            <button class="menu-item" data-day="recipes"><h3>Рецепты</h3><p>База полезных блюд</p></button>
-        </div>
+<body oncontextmenu="return false;">
+
+    <div id="app-container">
+
+        <section id="screen-detox" class="screen active">
+            <h2>Курс Детокс: Мягкое очищение</h2>
+            
+            <div id="detox-menu">
+                <button class="menu-item" data-day="0">
+                    <h3>1. Список Продуктов</h3>
+                    <p>Что купить и что подготовить</p>
+                </button>
+                <button class="menu-item" data-day="recipes">
+                    <h3>2. Рецепты</h3>
+                    <p>Основные блюда и напитки</p>
+                </button>
+                <button class="menu-item" data-day="1">
+                    <h3>3. День 1</h3>
+                    <p>План на первый день</p>
+                </button>
+                <button class="menu-item" data-day="2"><h3>4. День 2</h3><p>План на второй день</p></button>
+                <button class="menu-item" data-day="3"><h3>5. День 3</h3><p>План на третий день</p></button>
+                <button class="menu-item" data-day="4"><h3>6. День 4</h3><p>План на четвёртый день</p></button>
+                <button class="menu-item" data-day="5"><h3>7. День 5</h3><p>План на пятый день</p></button>
+                <button class="menu-item" data-day="6"><h3>8. День 6</h3><p>План на шестой день</p></button>
+                <button class="menu-item" data-day="7"><h3>9. День 7</h3><p>План на седьмой день и выход</p></button>
+                
+                <button class="menu-item future-course">
+                    <h3>Курс Стройность</h3>
+                    <p>Скоро!</p>
+                </button>
+            </div>
+        </section>
+
+        <section id="screen-day-detail" class="screen hidden">
+            <h2 id="day-detail-title">Меню на День</h2>
+            <div id="day-content">
+                </div>
+            <button class="back-button">← Назад к меню</button>
+        </section>
+
+        <section id="screen-results" class="screen hidden">
+            <h2>Ваши Результаты</h2>
+            <p class="description">Вносите данные в начале (День 0) и в конце (День 7) курса, чтобы увидеть свой прогресс!</p>
+
+            <div id="results-form-container">
+                <form id="results-form">
+                    <label>
+                        Дата
+                        <input type="date" id="result-date" required>
+                    </label>
+                    <label>
+                        Вес (кг)
+                        <input type="number" step="0.1" id="result-weight" placeholder="Например, 65.5" required>
+                    </label>
+                    <label>
+                        Объем талии (см)
+                        <input type="number" step="1" id="result-waist" placeholder="Например, 70">
+                    </label>
+                    <label>
+                        Объем бедер (см)
+                        <input type="number" step="1" id="result-hips" placeholder="Например, 95">
+                    </label>
+                    <button type="submit">Сохранить Результаты</button>
+                </form>
+            </div>
+
+            <h3>График Прогресса</h3>
+            <div class="chart-container">
+                <canvas id="results-chart"></canvas>
+            </div>
+
+            <h3>История Замеров</h3>
+            <div id="results-history">
+                </div>
+        </section>
+
+        <section id="screen-motivation" class="screen hidden">
+            <h2>Ваш Прогресс и Мотивация</h2>
+            
+            <div class="motivation-content">
+                
+                <div id="progress-bar-container">
+                    <h3>Прогресс курса (7 дней)</h3>
+                    <div id="progress-bar-track">
+                        <div id="progress-bar-fill"></div>
+                    </div>
+                    <p id="progress-text">Пройдено: 0 из 7 дней (0%)</p>
+                </div>
+
+                <button id="complete-day-button" class="action-button">
+                    ✓ Отметить сегодняшний день как завершенный
+                </button>
+
+                <div id="day-completion-history">
+                    </div>
+
+                <hr style="border-color: #33334d; margin: 30px 0;">
+                
+                <div id="minigame-container">
+                    <h3>🧠 Мини-игра: Детокс-Эксперт</h3>
+                    <p class="description">Проверьте свои знания о продуктах! Выберите полезный продукт из списка.</p>
+                    
+                    <div id="game-area">
+                        </div>
+                    
+                    <p id="game-message" class="tip-box hidden"></p>
+                </div>
+                <hr style="border-color: #33334d; margin: 30px 0;">
+
+                <h3>🏆 Напоминание и Правила</h3>
+                <p>Для закрепления результата и ощущения победы:</p>
+                <ul>
+                    <li>**Награда за день:** Отмечайте день только после того, как выпили всю свою норму воды и придерживались плана питания.</li>
+                    <li>**Вода:** От 2 до 3 литров чистой воды в день.</li>
+                    <li>**Запрет:** На время курса исключите алкоголь, сахар и молочные продукты.</li>
+                </ul>
+
+            </div>
+        </section>
+
+
+        <nav id="footer-nav">
+            <button data-target="screen-detox" class="nav-button active">Курс</button>
+            <button data-target="screen-results" class="nav-button">Результаты</button>
+            <button data-target="screen-motivation" class="nav-button">Мотивация</button>
+        </nav>
+
     </div>
 
-    <div id="screen-day-detail" class="screen">
-        <h2 id="day-detail-title">Заголовок</h2>
-        <div id="day-content"></div>
-        <button class="back-button">← Вернуться в меню</button>
-    </div>
-
-    <div id="screen-results" class="screen">
-        <h2>Мои замеры</h2>
-        <form id="results-form">
-            <input type="date" id="result-date" required>
-            <input type="number" id="result-weight" step="0.1" placeholder="Вес (кг)" required>
-            <input type="number" id="result-waist" placeholder="Обхват талии (см)">
-            <button type="submit">Сохранить данные</button>
-        </form>
-        <div style="height: 200px; margin-top: 20px;">
-            <canvas id="results-chart"></canvas>
-        </div>
-        <div id="results-history" style="margin-top: 20px;"></div>
-    </div>
-
-    <div id="screen-motivation" class="screen">
-        <h2>Мой прогресс</h2>
-        <div class="progress-container"><div id="progress-bar-fill"></div></div>
-        <p id="progress-text" style="text-align: center; color: var(--text-gray);">0 из 7 дней пройдено</p>
-        <button id="complete-day-button" class="action-button">Отметить сегодняшний день</button>
-        
-        <div id="game-section" style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px;">
-            <h3>Знания — сила</h3>
-            <div id="game-area"></div>
-            <div id="game-message" style="margin-top: 10px; padding: 10px; border-radius: 8px;"></div>
-        </div>
-    </div>
-
-    <nav id="footer-nav">
-        <button class="nav-button active" data-target="screen-detox">Программа</button>
-        <button class="nav-button" data-target="screen-results">Замеры</button>
-        <button class="nav-button" data-target="screen-motivation">Прогресс</button>
-    </nav>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // --- ДАННЫЕ (Объединенные) ---
-    const DETOX_DAYS_CONTENT = {
-        "1": { title: "День 1: Начало", description: "<h3>Завтрак:</h3><ul><li>Зеленый смузи</li><li>Горсть орехов</li></ul>" },
-        "5": { 
-            title: "День 5: Ваш План Питания", 
-            description: "<h3>Завтрак:</h3><ul><li>Фруктовое ассорти</li><li>Смузи</li></ul><h3>Обед:</h3><ul><li>Суп-пюре из брокколи</li></ul>" 
-        },
-        "6": {
-            title: "День 6: Ваш План Питания",
-            description: "<h3>Завтрак:</h3><ul><li>Льняная каша</li></ul><h3>Ужин:</h3><ul><li>Киноа и овощи</li></ul>"
-        },
-        "7": {
-            title: "День 7: Выход из Детокса",
-            description: "<h2>ПРАВИЛА ВЫХОДА</h2><p>Сегодня животный белок не употребляем!</p><h3>Завтрак:</h3><ul><li>Овсянка на воде</li></ul>"
-        },
-        "recipes": {
-            title: "Рецепты детокса",
-            description: "<h3>Зеленый смузи:</h3><p>Шпинат, яблоко, огурец, лимон.</p><h3>Суп-пюре:</h3><p>Брокколи, кокосовое молоко, специи.</p>"
-        }
-    };
-
-    // --- ЛОГИКА ---
-    const navButtons = document.querySelectorAll('.nav-button');
-    const screens = document.querySelectorAll('.screen');
-    const menuItems = document.querySelectorAll('.menu-item');
-    let resultsChart;
-
-    // Функция переключения
-    function switchScreen(targetId) {
-        screens.forEach(s => s.classList.remove('active'));
-        document.getElementById(targetId).classList.add('active');
-        navButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-target') === targetId));
-        
-        if (targetId === 'screen-results') renderResults();
-        if (targetId === 'screen-motivation') { updateProgressBar(); initializeMinigame(); }
-    }
-
-    navButtons.forEach(btn => btn.addEventListener('click', () => switchScreen(btn.getAttribute('data-target'))));
-
-    // Клик по дням
-    menuItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const day = item.getAttribute('data-day');
-            if (DETOX_DAYS_CONTENT[day]) {
-                document.getElementById('day-detail-title').textContent = DETOX_DAYS_CONTENT[day].title;
-                document.getElementById('day-content').innerHTML = DETOX_DAYS_CONTENT[day].description;
-                switchScreen('screen-day-detail');
-            }
-        });
-    });
-
-    document.querySelector('.back-button').addEventListener('click', () => switchScreen('screen-detox'));
-
-    // --- ЗАМЕРЫ И ГРАФИК ---
-    let resultsData = JSON.parse(localStorage.getItem('detoxResults')) || [];
-    const resultsForm = document.getElementById('results-form');
-
-    resultsForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const res = {
-            date: document.getElementById('result-date').value,
-            weight: document.getElementById('result-weight').value
-        };
-        resultsData.push(res);
-        localStorage.setItem('detoxResults', JSON.stringify(resultsData));
-        renderResults();
-        resultsForm.reset();
-    });
-
-    function renderResults() {
-        const ctx = document.getElementById('results-chart').getContext('2d');
-        if (resultsChart) resultsChart.destroy();
-        
-        const labels = resultsData.map(d => d.date);
-        const weights = resultsData.map(d => d.weight);
-
-        resultsChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{ label: 'Вес (кг)', data: weights, borderColor: '#a55eea', tension: 0.3 }]
-            },
-            options: { responsive: true, maintainAspectRatio: false }
-        });
-
-        document.getElementById('results-history').innerHTML = resultsData.slice(-3).map(d => 
-            `<div class="history-item"><span>${d.date}</span><span>${d.weight} кг</span></div>`
-        ).join('');
-    }
-
-    // --- ПРОГРЕСС ---
-    let completedDays = JSON.parse(localStorage.getItem('detoxCompletedDays')) || {};
-
-    function updateProgressBar() {
-        const count = Object.keys(completedDays).length;
-        const percent = Math.min((count / 7) * 100, 100);
-        document.getElementById('progress-bar-fill').style.width = percent + '%';
-        document.getElementById('progress-text').textContent = `${count} из 7 дней пройдено`;
-    }
-
-    document.getElementById('complete-day-button').addEventListener('click', () => {
-        const today = new Date().toISOString().split('T')[0];
-        completedDays[today] = true;
-        localStorage.setItem('detoxCompletedDays', JSON.stringify(completedDays));
-        updateProgressBar();
-    });
-
-    // --- МИНИ ИГРА ---
-    function initializeMinigame() {
-        const gameArea = document.getElementById('game-area');
-        const foods = [{n: 'Авокадо', g: true}, {n: 'Торт', g: false}, {n: 'Шпинат', g: true}, {n: 'Газировка', g: false}];
-        gameArea.innerHTML = foods.sort(() => Math.random() - 0.5).map(f => 
-            `<button class="action-button" style="width: 45%; margin: 5px; background: #333;" onclick="checkFood(${f.g}, this)">${f.n}</button>`
-        ).join('');
-    }
-
-    window.checkFood = (isGood, btn) => {
-        const msg = document.getElementById('game-message');
-        if(isGood) {
-            msg.textContent = "✅ Отлично! Это детокс-продукт.";
-            msg.style.background = "rgba(46, 204, 113, 0.2)";
-        } else {
-            msg.textContent = "❌ Увы, в этом продукте много лишнего.";
-            msg.style.background = "rgba(231, 76, 60, 0.2)";
-        }
-    };
-});
-</script>
+    <script src="script.js"></script>
 </body>
 </html>
