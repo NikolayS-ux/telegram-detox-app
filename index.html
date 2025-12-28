@@ -2,79 +2,87 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Detox App Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detox App — Твой путь к легкости</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-<div id="app-container">
-    <main id="screen-detox" class="screen">
-        <h2>🥗 План Детокса</h2>
-        <div id="detox-menu">
-            <div class="glass-card menu-item" onclick="showDay(1)">
-                <div class="menu-info">
-                    <h3>День 1: Очищение</h3>
-                    <p>Зеленые смузи и детокс-чай</p>
-                </div>
-                <span class="arrow">→</span>
+    <div id="app-container">
+        <section id="screen-detox" class="screen active">
+            <header>
+                <h1>7 Дней Детокса</h1>
+                <p>Выбери день, чтобы увидеть меню</p>
+            </header>
+            <div id="detox-menu" class="menu-grid">
+                <button class="menu-item" data-day="1"><span>День 1</span></button>
+                <button class="menu-item" data-day="2"><span>День 2</span></button>
+                <button class="menu-item" data-day="3"><span>День 3</span></button>
+                <button class="menu-item" data-day="4"><span>День 4</span></button>
+                <button class="menu-item" data-day="5"><span>День 5</span></button>
+                <button class="menu-item" data-day="6"><span>День 6</span></button>
+                <button class="menu-item" data-day="7"><span>День 7</span></button>
+                <button class="menu-item recipe-btn" data-day="recipes"><span>Книга рецептов</span></button>
             </div>
-            <div class="glass-card menu-item" onclick="showDay(2)">
-                <div class="menu-info">
-                    <h3>День 2: Энергия</h3>
-                    <p>Полезные жиры и овощной суп</p>
-                </div>
-                <span class="arrow">→</span>
-            </div>
-        </div>
-    </main>
+        </section>
 
-    <main id="screen-day-details" class="screen hidden">
-        <div id="day-content" class="glass-card">
-            </div>
-        <button class="back-button" onclick="goBack()">🔙 Назад к списку</button>
-    </main>
+        <section id="screen-day-detail" class="screen hidden">
+            <button class="back-button"><i class="fas fa-arrow-left"></i> Назад</button>
+            <h2 id="day-detail-title"></h2>
+            <div id="day-content"></div>
+        </section>
 
-    <main id="screen-results" class="screen hidden">
-        <h2>📊 Твой вес</h2>
-        <div class="glass-card">
+        <section id="screen-results" class="screen hidden">
+            <h2>Мой прогресс</h2>
             <form id="results-form">
-                <label>Введите вес (кг):</label>
-                <input type="number" id="weight-input" step="0.1" required>
-                <button type="submit">Записать результат</button>
+                <input type="date" id="result-date" required>
+                <input type="number" id="result-weight" placeholder="Вес (кг)" step="0.1" required>
+                <input type="number" id="result-waist" placeholder="Талия (см)">
+                <input type="number" id="result-hips" placeholder="Бедра (см)">
+                <button type="submit" class="action-button">Сохранить замер</button>
             </form>
-        </div>
-        <div id="history-list"></div>
-    </main>
-
-    <main id="screen-motivation" class="screen hidden">
-        <h2>🚀 Твой успех</h2>
-        <div class="glass-card text-center">
-            <p>Курс пройден на:</p>
-            <div id="progress-container">
-                <div id="progress-bar-fill"></div>
+            <div class="chart-container">
+                <canvas id="results-chart"></canvas>
             </div>
-            <p id="progress-text">0%</p>
-        </div>
-    </main>
+            <div id="results-history"></div>
+        </section>
 
-    <nav id="footer-nav">
-        <button class="nav-button active" onclick="switchScreen('screen-detox', this)">
-            <span class="icon">🥗</span>
-            <span class="label">План</span>
-        </button>
-        <button class="nav-button" onclick="switchScreen('screen-results', this)">
-            <span class="icon">📊</span>
-            <span class="label">Вес</span>
-        </button>
-        <button class="nav-button" onclick="switchScreen('screen-motivation', this)">
-            <span class="icon">🚀</span>
-            <span class="label">Успех</span>
-        </button>
-    </nav>
-</div>
+        <section id="screen-motivation" class="screen hidden">
+            <h2>Мотивация</h2>
+            <div class="progress-section">
+                <div id="progress-bar-container">
+                    <div id="progress-bar-fill"></div>
+                </div>
+                <p id="progress-text">Пройдено: 0 из 7 дней</p>
+                <button id="complete-day-button" class="action-button">Отметить день</button>
+            </div>
 
-<script src="script.js"></script>
+            <div class="game-section">
+                <h3>Мини-игра: Проверь себя</h3>
+                <p>Выбери полезный детокс-продукт:</p>
+                <div id="game-area"></div>
+                <div id="game-message" class="hidden"></div>
+            </div>
+            
+            <div id="day-completion-history"></div>
+        </section>
+
+        <nav id="footer-nav">
+            <button class="nav-button active" data-target="screen-detox">
+                <i class="fas fa-leaf"></i><span>Меню</span>
+            </button>
+            <button class="nav-button" data-target="screen-results">
+                <i class="fas fa-chart-line"></i><span>Замеры</span>
+            </button>
+            <button class="nav-button" data-target="screen-motivation">
+                <i class="fas fa-fire"></i><span>Успехи</span>
+            </button>
+        </nav>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
