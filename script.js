@@ -1,15 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Состояние приложения
     let resultsData = JSON.parse(localStorage.getItem('detoxResults')) || [];
     let completedDays = JSON.parse(localStorage.getItem('detoxCompletedDays')) || {};
-    const TOTAL_DAYS = 7;
     let resultsChart;
 
-    // 2. Навигация
     function switchScreen(targetId) {
-        document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-        document.getElementById(targetId).classList.remove('hidden');
-        
+        const screens = document.querySelectorAll('.screen');
+        screens.forEach(s => {
+            s.style.opacity = '0';
+            setTimeout(() => s.classList.add('hidden'), 200);
+        });
+
+        setTimeout(() => {
+            const target = document.getElementById(targetId);
+            target.classList.remove('hidden');
+            setTimeout(() => {
+                target.style.opacity = '1';
+                target.style.transition = 'opacity 0.4s ease';
+            }, 50);
+        }, 210);
+
         document.querySelectorAll('.nav-button').forEach(btn => {
             btn.classList.toggle('active', btn.getAttribute('data-target') === targetId);
         });
@@ -18,20 +27,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (targetId === 'screen-motivation') updateMotivation();
     }
 
+    // Навигация
     document.querySelectorAll('.nav-button').forEach(btn => {
         btn.addEventListener('click', () => switchScreen(btn.getAttribute('data-target')));
     });
 
-    // 3. Меню и детали дня
+    // Клик по дням
     document.querySelectorAll('.menu-item').forEach(btn => {
         btn.addEventListener('click', () => {
             const dayKey = btn.getAttribute('data-day');
-            const content = DETOX_DAYS_CONTENT[dayKey];
-            if (content) {
-                document.getElementById('day-detail-title').textContent = content.title;
+            const data = DETOX_DAYS_CONTENT[dayKey];
+            if (data) {
+                document.getElementById('day-detail-title').textContent = data.title;
                 document.getElementById('day-content').innerHTML = `
-                    ${content.photoUrl ? `<img src="${content.photoUrl}" alt="меню">` : ''}
-                    ${content.description}
+                    ${data.photoUrl ? `<img src="${data.photoUrl}" style="width:100%; border-radius:15px; margin-bottom:20px;">` : ''}
+                    <div class="description-text">${data.description}</div>
                 `;
                 switchScreen('screen-day-detail');
             }
@@ -40,44 +50,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelector('.back-button').addEventListener('click', () => switchScreen('screen-detox'));
 
-    // 4. Логика замеров
+    // Графики
+    function renderResults() {
+        const ctx = document.getElementById('results-chart').getContext('2d');
+        if (resultsChart) resultsChart.destroy();
+        resultsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: resultsData.map(d => d.date),
+                datasets: [{
+                    label: 'Вес',
+                    data: resultsData.map(d => d.weight),
+                    borderColor: '#43a047',
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(67, 160, 71, 0.1)'
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+    }
+
+    // Форма результатов
     document.getElementById('results-form').addEventListener('submit', (e) => {
         e.preventDefault();
         const entry = {
             date: document.getElementById('result-date').value,
-            weight: parseFloat(document.getElementById('result-weight').value),
-            waist: parseInt(document.getElementById('result-waist').value),
-            hips: parseInt(document.getElementById('result-hips').value)
+            weight: parseFloat(document.getElementById('result-weight').value)
         };
         resultsData.push(entry);
-        resultsData.sort((a,b) => new Date(a.date) - new Date(b.date));
         localStorage.setItem('detoxResults', JSON.stringify(resultsData));
         renderResults();
         e.target.reset();
     });
 
-    function renderResults() {
-        const ctx = document.getElementById('results-chart').getContext('2d');
-        if (resultsChart) resultsChart.destroy();
-        
-        resultsChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: resultsData.map(d => d.date),
-                datasets: [{ label: 'Вес (кг)', data: resultsData.map(d => d.weight), borderColor: '#4caf50' }]
-            },
-            options: { responsive: true, maintainAspectRatio: false }
-        });
-    }
-
-    // 5. Мотивация и Игра
     function updateMotivation() {
         const count = Object.keys(completedDays).length;
-        const percent = (count / TOTAL_DAYS) * 100;
-        document.getElementById('progress-bar-fill').style.width = percent + '%';
-        document.getElementById('progress-text').textContent = `Пройдено: ${count} из ${TOTAL_DAYS} дней`;
-        
-        initGame();
+        document.getElementById('progress-bar-fill').style.width = (count / 7 * 100) + '%';
+        document.getElementById('progress-text').textContent = `${count}/7`;
     }
 
     document.getElementById('complete-day-button').addEventListener('click', () => {
@@ -86,25 +96,4 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('detoxCompletedDays', JSON.stringify(completedDays));
         updateMotivation();
     });
-
-    function initGame() {
-        const items = [
-            {n: 'Авокадо', h: true}, {n: 'Сахар', h: false}, 
-            {n: 'Шпинат', h: true}, {n: 'Булка', h: false}
-        ];
-        const area = document.getElementById('game-area');
-        area.innerHTML = '';
-        items.sort(() => Math.random() - 0.5).forEach(item => {
-            const b = document.createElement('button');
-            b.className = 'game-choice-button';
-            b.textContent = item.n;
-            b.onclick = () => {
-                const msg = document.getElementById('game-message');
-                msg.classList.remove('hidden');
-                msg.textContent = item.h ? "✅ Верно!" : "❌ Не в детоксе!";
-                setTimeout(() => msg.classList.add('hidden'), 2000);
-            };
-            area.appendChild(b);
-        });
-    }
 });
