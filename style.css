@@ -1,281 +1,146 @@
-/* Основные цвета: */
-/* - Темно-синий/Космос: #1a1a2e */
-/* - Лиловый/Акцент: #a55eea */
-/* - Белый/Текст: #ffffff */
+:root {
+    --bg-main: #090912;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent: #bb86fc;
+    --gradient: linear-gradient(135deg, #a55eea 0%, #dc52f8 100%);
+    --text: #ffffff;
+    --text-dim: #a0a0ab;
+}
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: #0d0d1a; 
-    color: #ffffff; 
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    background: radial-gradient(circle at top right, #1a1a3a, var(--bg-main));
+    background-attachment: fixed;
+    color: var(--text);
     display: flex;
     justify-content: center;
 }
 
 #app-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 480px;
     min-height: 100vh;
-    background-color: #1a1a2e; 
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
-    display: flex;
-    flex-direction: column;
+    position: relative;
 }
 
 .screen {
-    padding: 20px;
-    flex-grow: 1; 
-    overflow-y: auto; 
+    padding: 30px 20px 120px 20px;
+    box-sizing: border-box;
 }
 
-.hidden {
-    display: none !important;
-}
+.hidden { display: none !important; }
 
 h2 {
-    color: #a55eea; 
-    border-bottom: 2px solid #33334d; 
-    padding-bottom: 10px;
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-h3 {
-    color: #ffffff;
-    margin-top: 25px;
-    margin-bottom: 15px;
-    font-size: 18px;
-    border-bottom: 1px solid #33334d;
-    padding-bottom: 5px;
+/* Glassmorphism карточки */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 20px;
+    margin-bottom: 16px;
 }
 
-.day-photo-container {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.day-photo {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-#detox-menu {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-}
-
+/* Элементы меню */
 .menu-item {
-    background-color: #2e2e4e; 
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
 }
 
-.menu-item:hover {
-    background-color: #383861;
-    transform: translateY(-2px);
-}
+.menu-item:active { transform: scale(0.96); }
 
-.menu-item h3 {
-    margin: 0 0 5px 0;
-    font-size: 18px;
-    color: #a55eea;
-    border: none;
-    padding: 0;
-}
+.menu-info h3 { margin: 0; color: var(--accent); font-size: 18px; }
+.menu-info p { margin: 5px 0 0 0; color: var(--text-dim); font-size: 14px; }
+.arrow { color: var(--accent); font-size: 20px; }
 
-.menu-item p {
-    margin: 0;
-    font-size: 14px;
-    color: #cccccc;
-}
-
-.future-course {
-    background-color: #1f1f3d; 
-    border: 1px dashed #a55eea;
-    opacity: 0.7;
-}
-
-/* СТИЛИ ДЛЯ ФОРМЫ РЕЗУЛЬТАТОВ */
-
-#results-form label {
-    display: block;
-    margin-bottom: 15px;
-    font-size: 14px;
-    color: #ffffff;
-}
-
-#results-form input {
+/* Кнопки и формы */
+input {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
+    padding: 15px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    color: white;
+    font-size: 16px;
+    margin: 15px 0;
     box-sizing: border-box;
-    border: 1px solid #4d4d73; 
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: #33334d; 
-    color: #ffffff; 
 }
 
-#results-form button[type="submit"] {
-    background-color: #a55eea; 
-    color: white;
-    padding: 12px;
+button {
+    width: 100%;
+    padding: 16px;
+    border-radius: 18px;
     border: none;
-    border-radius: 8px;
-    width: 100%;
-    margin-top: 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-#results-form button[type="submit"]:hover {
-    background-color: #8e44ad;
-}
-
-/* СТИЛИ ДЛЯ ГРАФИКА */
-.description {
-    color: #cccccc;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-.chart-container {
-    height: 300px; /* Задаем высоту для графика */
-    width: 100%;
-    margin-top: 15px;
-    margin-bottom: 30px;
-    background-color: #22223a;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-
-/* СТИЛИ ДЛЯ ИСТОРИИ ЗАМЕРОВ */
-.results-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.results-item {
-    background-color: #2e2e4e;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border-left: 5px solid #a55eea;
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
-}
-
-.results-date {
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 5px;
-}
-
-.results-data {
-    font-size: 14px;
-    color: #cccccc;
-}
-
-.results-data strong {
-    color: #a55eea; 
-    font-weight: 600;
-}
-
-
-/* СТИЛИ ДЛЯ ДЕТАЛЕЙ ДНЯ (РЕЦЕПТЫ) */
-
-#day-content ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#day-content ul li {
-    background-color: #2e2e4e;
-    padding: 10px;
-    margin-bottom: 8px;
-    border-left: 4px solid #a55eea;
-    border-radius: 4px;
-}
-
-#day-content hr {
-    border: 0;
-    border-top: 1px dashed #4d4d73;
-    margin: 20px 0;
-}
-
-#day-content h4 {
-    color: #a55eea;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-#day-content p {
-    line-height: 1.6;
-    color: #cccccc;
-    margin-bottom: 15px;
-    font-size: 15px;
-}
-
-.back-button {
-    background-color: #a55eea;
+    background: var(--gradient);
     color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    width: 100%;
-    margin-top: 20px;
-    font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.2s;
+    box-shadow: 0 10px 20px rgba(165, 94, 234, 0.2);
 }
 
-.back-button:hover {
-    background-color: #8e44ad;
-}
-
-/* СТИЛИ ДЛЯ НИЖНЕЙ НАВИГАЦИИ */
-
+/* Парящая навигация */
 #footer-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background: rgba(20, 20, 35, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
     display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    background-color: #1a1a2e; 
-    border-top: 1px solid #33334d;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
-    position: sticky;
-    bottom: 0;
-    z-index: 100;
+    padding: 8px;
+    border: 1px solid var(--glass-border);
+    z-index: 1000;
 }
 
 .nav-button {
     background: none;
-    border: none;
-    color: #ffffff;
-    padding: 10px 0;
-    cursor: pointer;
-    font-size: 14px;
-    flex-grow: 1;
-    transition: color 0.2s, background-color 0.2s;
+    box-shadow: none;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-dim);
+    opacity: 0.6;
 }
 
 .nav-button.active {
-    color: #a55eea; 
-    font-weight: bold;
-    border-bottom: 3px solid #a55eea;
+    opacity: 1;
+    color: var(--accent);
+}
+
+.nav-button .icon { font-size: 20px; }
+.nav-button .label { font-size: 11px; font-weight: 600; }
+
+/* Прогресс */
+#progress-container {
+    height: 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+#progress-bar-fill {
+    height: 100%;
+    background: var(--gradient);
+    width: 0%;
+    transition: width 1s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
