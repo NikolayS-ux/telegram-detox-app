@@ -3,123 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Detox Plan</title>
+    <title>Detox App</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+
+<body oncontextmenu="return false;">
 
     <div id="app-container">
+
         <section id="screen-detox" class="screen active">
-            <header class="main-header">
-                <div class="header-content">
-                    <h1>Мой Детокс</h1>
-                    <p>Программа очищения и обновления</p>
-                </div>
-            </header>
+            <h2>Курс Детокс: Мягкое очищение</h2>
             
-            <div class="menu-grid" id="detox-menu">
-                <div class="menu-item" data-day="1">
-                    <div class="day-icon"><i class="fas fa-droplet"></i></div>
-                    <span>День 1</span>
-                </div>
-                <div class="menu-item" data-day="2">
-                    <div class="day-icon"><i class="fas fa-leaf"></i></div>
-                    <span>День 2</span>
-                </div>
-                <div class="menu-item" data-day="3">
-                    <div class="day-icon"><i class="fas fa-seedling"></i></div>
-                    <span>День 3</span>
-                </div>
-                <div class="menu-item" data-day="4">
-                    <div class="day-icon"><i class="fas fa-sun"></i></div>
-                    <span>День 4</span>
-                </div>
-                <div class="menu-item" data-day="5">
-                    <div class="day-icon"><i class="fas fa-bolt"></i></div>
-                    <span>День 5</span>
-                </div>
-                <div class="menu-item" data-day="6">
-                    <div class="day-icon"><i class="fas fa-mountain"></i></div>
-                    <span>День 6</span>
-                </div>
-                <div class="menu-item" data-day="7">
-                    <div class="day-icon"><i class="fas fa-flag-checkered"></i></div>
-                    <span>День 7</span>
-                </div>
-                <div class="menu-item recipe-card" data-day="recipes">
-                    <div class="day-icon"><i class="fas fa-book-open"></i></div>
-                    <span>Рецепты</span>
-                </div>
+            <div id="detox-menu">
+                <button class="menu-item" data-day="0">
+                    <h3>1. Список Продуктов</h3>
+                    <p>Что купить и что подготовить</p>
+                </button>
+                <button class="menu-item" data-day="recipes">
+                    <h3>2. Рецепты</h3>
+                    <p>Основные блюда и напитки</p>
+                </button>
+                <button class="menu-item" data-day="1">
+                    <h3>3. День 1</h3>
+                    <p>План на первый день</p>
+                </button>
+                <button class="menu-item" data-day="2"><h3>4. День 2</h3><p>План на второй день</p></button>
+                <button class="menu-item" data-day="3"><h3>5. День 3</h3><p>План на третий день</p></button>
+                <button class="menu-item" data-day="4"><h3>6. День 4</h3><p>План на четвёртый день</p></button>
+                <button class="menu-item" data-day="5"><h3>7. День 5</h3><p>План на пятый день</p></button>
+                <button class="menu-item" data-day="6"><h3>8. День 6</h3><p>План на шестой день</p></button>
+                <button class="menu-item" data-day="7"><h3>9. День 7</h3><p>План на седьмой день и выход</p></button>
+                
+                <button class="menu-item future-course">
+                    <h3>Курс Стройность</h3>
+                    <p>Скоро!</p>
+                </button>
             </div>
         </section>
 
         <section id="screen-day-detail" class="screen hidden">
-            <div class="detail-header">
-                <button class="back-button"><i class="fas fa-chevron-left"></i></button>
-                <h2 id="day-detail-title">План питания</h2>
-            </div>
-            <div id="day-content" class="content-card"></div>
+            <h2 id="day-detail-title">Меню на День</h2>
+            <div id="day-content">
+                </div>
+            <button class="back-button">← Назад к меню</button>
         </section>
 
         <section id="screen-results" class="screen hidden">
-            <h2 class="section-title">Аналитика прогресса</h2>
-            <div class="card">
+            <h2>Ваши Результаты</h2>
+            <p class="description">Вносите данные в начале (День 0) и в конце (День 7) курса, чтобы увидеть свой прогресс!</p>
+
+            <div id="results-form-container">
                 <form id="results-form">
-                    <div class="form-row">
+                    <label>
+                        Дата
                         <input type="date" id="result-date" required>
-                        <input type="number" id="result-weight" placeholder="Вес (кг)" step="0.1" required>
-                    </div>
-                    <div class="form-row">
-                        <input type="number" id="result-waist" placeholder="Талия (см)">
-                        <input type="number" id="result-hips" placeholder="Бедра (см)">
-                    </div>
-                    <button type="submit" class="btn-primary">Добавить замер</button>
+                    </label>
+                    <label>
+                        Вес (кг)
+                        <input type="number" step="0.1" id="result-weight" placeholder="Например, 65.5" required>
+                    </label>
+                    <label>
+                        Объем талии (см)
+                        <input type="number" step="1" id="result-waist" placeholder="Например, 70">
+                    </label>
+                    <label>
+                        Объем бедер (см)
+                        <input type="number" step="1" id="result-hips" placeholder="Например, 95">
+                    </label>
+                    <button type="submit">Сохранить Результаты</button>
                 </form>
             </div>
-            <div class="card chart-box">
+
+            <h3>График Прогресса</h3>
+            <div class="chart-container">
                 <canvas id="results-chart"></canvas>
             </div>
-            <div id="results-history" class="history-list"></div>
+
+            <h3>История Замеров</h3>
+            <div id="results-history">
+                </div>
         </section>
 
         <section id="screen-motivation" class="screen hidden">
-            <h2 class="section-title">Ваши достижения</h2>
-            <div class="card progress-card">
-                <div class="progress-circle-box">
-                    <div id="progress-text">0/7</div>
-                    <p>дней пройдено</p>
-                </div>
-                <div class="progress-bar-bg">
-                    <div id="progress-bar-fill"></div>
-                </div>
-                <button id="complete-day-button" class="btn-primary">Завершить сегодня</button>
-            </div>
+            <h2>Ваш Прогресс и Мотивация</h2>
             
-            <div class="card game-card">
-                <h3>Смарт-викторина</h3>
-                <p>Выберите полезный продукт:</p>
-                <div id="game-area" class="game-options"></div>
-                <div id="game-message" class="hidden"></div>
+            <div class="motivation-content">
+                
+                <div id="progress-bar-container">
+                    <h3>Прогресс курса (7 дней)</h3>
+                    <div id="progress-bar-track">
+                        <div id="progress-bar-fill"></div>
+                    </div>
+                    <p id="progress-text">Пройдено: 0 из 7 дней (0%)</p>
+                </div>
+
+                <button id="complete-day-button" class="action-button">
+                    ✓ Отметить сегодняшний день как завершенный
+                </button>
+
+                <div id="day-completion-history">
+                    </div>
+
+                <hr style="border-color: #33334d; margin: 30px 0;">
+                
+                <div id="minigame-container">
+                    <h3>🧠 Мини-игра: Детокс-Эксперт</h3>
+                    <p class="description">Проверьте свои знания о продуктах! Выберите полезный продукт из списка.</p>
+                    
+                    <div id="game-area">
+                        </div>
+                    
+                    <p id="game-message" class="tip-box hidden"></p>
+                </div>
+                <hr style="border-color: #33334d; margin: 30px 0;">
+
+                <h3>🏆 Напоминание и Правила</h3>
+                <p>Для закрепления результата и ощущения победы:</p>
+                <ul>
+                    <li>**Награда за день:** Отмечайте день только после того, как выпили всю свою норму воды и придерживались плана питания.</li>
+                    <li>**Вода:** От 2 до 3 литров чистой воды в день.</li>
+                    <li>**Запрет:** На время курса исключите алкоголь, сахар и молочные продукты.</li>
+                </ul>
+
             </div>
         </section>
 
+
         <nav id="footer-nav">
-            <button class="nav-button active" data-target="screen-detox">
-                <i class="fas fa-utensils"></i><span>Меню</span>
-            </button>
-            <button class="nav-button" data-target="screen-results">
-                <i class="fas fa-chart-pie"></i><span>Прогресс</span>
-            </button>
-            <button class="nav-button" data-target="screen-motivation">
-                <i class="fas fa-medal"></i><span>Успехи</span>
-            </button>
+            <button data-target="screen-detox" class="nav-button active">Курс</button>
+            <button data-target="screen-results" class="nav-button">Результаты</button>
+            <button data-target="screen-motivation" class="nav-button">Мотивация</button>
         </nav>
+
     </div>
 
-    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
